@@ -1,0 +1,679 @@
+/* =========================================================
+   Gulam Jilani — Portfolio, Home Page v3
+   Design source: Home Page Version 3 (Figma export, 1440 frame)
+   Content container 1200px · outer container 1410px
+   ========================================================= */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* palette (sampled from the design export) */
+  --ink:          #151d2d;
+  --ink-black:    #000000;
+  --muted:        #565c68;
+  --muted-2:      #3c4145;
+  --soft:         #a3aebc;
+  --soft-2:       #b4b7bc;
+  --line:         #303030;
+  --line-light:   #e7e7e9;
+
+  --bg:           #ffffff;
+  --bg-hero:      #f9f9f9;
+  --bg-endorse:   #efefef;
+  --card-grey:    #eef0f2;
+  --card-blue:    #d6e8f6;
+  --chat:         #8291a6;
+
+  /* layout */
+  --wrap:         1200px;   /* content sections */
+  --wrap-wide:    1410px;   /* header, CTA, footer */
+  --gutter:       clamp(16px, 4vw, 24px);
+  --radius-card:  24px;
+  --radius-btn:   10px;
+
+  /* type — fluid, anchored to the 1440 design */
+  --fs-display:   clamp(56px, 8.4vw, 120px);  /* "Let's Chat"            */
+  --fs-h2:        clamp(32px, 4.6vw, 48px);   /* section headings        */
+  --fs-lead:      clamp(16px, 1.7vw, 20px);   /* section sub-copy        */
+  --fs-24:        clamp(19px, 2vw, 24px);     /* hero copy, stat numbers */
+  --fs-20:        clamp(18px, 1.7vw, 20px);   /* card titles             */
+  --fs-18:        clamp(16px, 1.4vw, 18px);   /* buttons                 */
+  --fs-16:        clamp(15px, 1.25vw, 16px);  /* body copy               */
+  --fs-14:        14px;
+  --fs-12:        12px;
+
+  --shadow-card:  0 8px 28px rgba(21, 29, 45, .08);
+  --ease:         cubic-bezier(.2, .7, .3, 1);
+
+  /* 8-point sparkle used as the tag separator */
+  --sparkle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0.5c.5 4 1 6.4 1.9 7.9l4.9-3.4-3.4 4.9c1.5.9 3.9 1.4 7.9 1.9-4 .5-6.4 1-7.9 1.9l3.4 4.9-4.9-3.4c-.9 1.5-1.4 3.9-1.9 7.9-.5-4-1-6.4-1.9-7.9l-4.9 3.4 3.4-4.9C7.1 13 4.7 12.5.7 12c4-.5 6.4-1 7.9-1.9L5.2 5.2l4.9 3.4C11 7.1 11.5 4.7 12 .5Z'/%3E%3C/svg%3E");
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--fs-16);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, p, figure, blockquote, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--gutter) * 2);  /* 1200px of content at desktop */
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* full-frame rows: header, CTA and footer sit in the 1440 frame with 15–30px gutters */
+.wrap--frame {
+  max-width: 1440px;
+  padding-inline: clamp(16px, 2.1vw, 30px);
+}
+
+.ic { width: 1em; height: 1em; flex: none; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 0 0 8px 0;
+}
+.skip-link:focus-visible { left: 0; }
+
+:where(a, button):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(249, 249, 249, .92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 8px 28px rgba(21, 29, 45, 0);   /* transparent by default, faded in below */
+  transition: box-shadow .3s var(--ease);
+}
+
+/* browsers without backdrop-filter (old Firefox/Samsung Internet) get a
+   solid header instead of a see-through one */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header { background: var(--bg-hero); }
+}
+
+/* Compact/floating state: toggled by assets/js/header-scroll.js once the
+   page has scrolled past a threshold while scrolling down; removed again
+   on scroll up. Only the header shrinks — content layout is untouched. */
+.site-header.is-compact { box-shadow: var(--shadow-card); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 96px;
+  transition: min-height .3s var(--ease);
+}
+.site-header.is-compact .header-inner { min-height: 64px; }
+
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark { width: clamp(36px, 4vw, 44px); height: auto; transition: width .3s var(--ease); }
+.site-header.is-compact .brand-mark { width: 30px; }
+.brand-name { font-size: var(--fs-24); font-weight: 400; letter-spacing: -.01em; transition: font-size .3s var(--ease); }
+.site-header.is-compact .brand-name { font-size: 16px; }
+
+.header-actions { display: flex; align-items: center; gap: clamp(8px, 1.2vw, 16px); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 42px; padding: 0 18px;
+  border: 1px solid var(--line-light);
+  border-radius: 999px;
+  background: var(--bg-hero);
+  color: var(--muted);
+  font-size: var(--fs-14);
+  transition: border-color .2s var(--ease), color .2s var(--ease),
+    background-color .2s var(--ease), transform .2s var(--ease),
+    height .3s var(--ease), padding .3s var(--ease), font-size .3s var(--ease);
+}
+.pill .ic { width: 18px; height: 18px; color: var(--ink); transition: transform .2s var(--ease); }
+.pill:hover { border-color: var(--ink); color: var(--ink); background: #fff; transform: translateY(-1px); }
+.pill:hover .ic { transform: scale(1.1); }
+.site-header.is-compact .pill { height: 36px; padding: 0 14px; font-size: 13px; }
+
+.icon-btn {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px;
+  min-width: 42px; min-height: 42px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  color: var(--ink);
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.icon-btn .ic { width: 21px; height: 21px; }
+.icon-btn .pill-label { font-size: var(--fs-12); line-height: 1; white-space: nowrap; }
+.icon-btn:hover { background: rgba(21, 29, 45, .07); transform: translateY(-1px); }
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-18);
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.btn .ic { width: 1.05em; height: 1.05em; }
+
+.btn-dark  { background: var(--ink); color: #fff; }
+.btn-dark:hover  { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(21, 29, 45, .25); }
+
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+
+.btn-light { background: var(--bg-hero); color: var(--ink); border-color: var(--ink); }
+.btn-light:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, .35); }
+
+.btn-case { margin-top: auto; align-self: flex-start; }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero { background: var(--bg-hero); }
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* design: photo sits just under the header, 28px of air below the scroll cue */
+  padding-block: clamp(8px, 1vw, 4px) clamp(28px, 3.4vw, 32px);
+}
+
+.hero-photo {
+  width: clamp(112px, 11vw, 150px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-eyebrow {
+  margin-top: clamp(14px, 1.6vw, 22px);
+  font-size: var(--fs-24);
+  font-weight: 400;
+  color: var(--soft);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin-top: clamp(10px, 1.2vw, 16px);
+  max-width: 860px;   /* design: single line at 1440 */
+  font-size: var(--fs-24);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.005em;
+}
+
+.hero-sub {
+  margin-top: clamp(10px, 1.4vw, 18px);
+  max-width: 990px;   /* design: two lines at 1440 */
+  font-size: var(--fs-24);
+  font-weight: 400;
+  line-height: 1.42;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: clamp(28px, 4.5vw, 62px);
+}
+
+.scroll-cue {
+  margin-top: clamp(24px, 3.5vw, 48px);
+  color: var(--ink);
+}
+.scroll-cue svg { width: 26px; height: 40px; }
+.scroll-cue .wheel { animation: wheel 1.8s var(--ease) infinite; }
+
+@keyframes wheel {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(7px); opacity: .35; }
+}
+
+/* =========================================================
+   Sections
+   ========================================================= */
+.section { padding-block: clamp(56px, 7vw, 88px); }
+
+.section-head { text-align: center; margin-bottom: clamp(28px, 3vw, 40px); }
+.section-head h2 {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+.section-head p {
+  margin-top: 10px;
+  font-size: var(--fs-lead);
+  color: var(--ink);
+}
+
+/* =========================================================
+   Project cards
+   ========================================================= */
+.project {
+  display: grid;
+  grid-template-columns: minmax(320px, 435px) 1fr;   /* design: 435 / 765 */
+  gap: 0;
+  background: var(--card-grey);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  min-height: 520px;
+}
+.project + .project { margin-top: 30px; }
+.project--blue { background: var(--card-blue); }
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 36px) clamp(20px, 2.3vw, 32px);
+}
+
+.stat {
+  font-size: var(--fs-24);
+  font-weight: 700;
+  color: var(--ink-black);
+  line-height: 1.25;
+}
+.stat span { font-size: var(--fs-18); font-weight: 400; }
+
+.stat-caption {
+  margin-top: 8px;
+  font-size: var(--fs-14);
+  color: var(--muted-2);
+  max-width: 46ch;
+}
+
+.project-logo {
+  width: auto;
+  height: clamp(32px, 3vw, 41px);
+  margin-top: clamp(28px, 4.5vw, 60px);
+  object-fit: contain;
+  object-position: left center;
+}
+
+.project-title {
+  margin-top: 18px;
+  font-size: var(--fs-20);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink-black);
+  max-width: 22ch;
+}
+
+.project-desc {
+  margin-top: 12px;
+  font-size: var(--fs-14);   /* design: 14px / 17.3 leading */
+  line-height: 1.24;
+  color: var(--ink-black);
+  max-width: 42ch;
+}
+
+/* tag pills with the sparkle separators from the design */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 16px;
+  margin-top: clamp(18px, 2vw, 24px);
+  /* guarantees the gap above "View Case Study" once the card stacks */
+  margin-bottom: 30px;
+}
+.tag {
+  display: inline-flex; align-items: center;
+  height: 31px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+/* separator lives between pills as its own flex item — never inside a
+   pill's border box — so it can never straddle an outline or distort
+   pill height/centring. See .tags li.tag-sep in the markup. */
+.tag-sep {
+  width: 16px; height: 16px;
+  flex: 0 0 auto;
+  background-color: var(--ink);
+  -webkit-mask: var(--sparkle) center / contain no-repeat;
+          mask: var(--sparkle) center / contain no-repeat;
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  /* contain, not cover: these composites carry their own canvas padding
+     already color-matched to each card's background (see project--blue),
+     so showing them in full — rather than cropping — is what blends
+     seamlessly and keeps the right-edge UI (buttons, listings) visible. */
+  object-fit: contain;
+  object-position: center;
+  transition: transform .5s var(--ease);
+}
+.project:hover .project-media img { transform: scale(1.02); }
+
+/* =========================================================
+   UX process flow
+   ========================================================= */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(8px, 1.4vw, 20px);
+  margin-top: clamp(8px, 1.5vw, 16px);
+}
+
+.flow-art { flex: 0 1 auto; display: grid; place-items: center; }
+.flow-art img { height: auto; opacity: .95; }
+.flow li:nth-child(1) img { width: clamp(90px, 12vw, 175px); }
+.flow li:nth-child(3) img { width: clamp(70px, 8.5vw, 121px); }
+.flow li:nth-child(5) img { width: clamp(90px, 11.5vw, 165px); }
+.flow li:nth-child(7) img { width: clamp(80px, 10.7vw, 154px); }
+
+.flow-step {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  font-size: var(--fs-20);
+  line-height: 1.25;
+  color: var(--ink);
+}
+/* fixed height keeps every step label on the same baseline */
+.flow-icon { height: clamp(26px, 2.3vw, 32px); width: auto; object-fit: contain; }
+
+/* =========================================================
+   Photo collage
+   ========================================================= */
+.collage {
+  display: grid;
+  grid-template-columns: 330fr 690fr 330fr;
+  gap: 30px;
+  max-width: var(--wrap-wide);
+  margin: clamp(40px, 5.5vw, 72px) auto 0;
+  padding-inline: 15px;
+  height: clamp(420px, 51vw, 730px);
+}
+
+.collage-col { display: grid; gap: 30px; min-height: 0; }
+.collage-col--left,
+.collage-col--right { grid-template-rows: 1fr 1fr; }
+.collage-col--right { margin-top: clamp(20px, 4.5vw, 66px); }
+
+.collage figure { min-height: 0; height: 100%; overflow: hidden; border-radius: 12px; }
+.collage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   Endorsements
+   ========================================================= */
+.section--endorse { background: var(--bg-endorse); }
+
+.quotes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.quote {
+  flex: 1 1 340px;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px 27px;
+}
+
+.quote blockquote {
+  font-size: var(--fs-14);   /* design: 14px / 17px leading */
+  line-height: 1.21;
+  color: var(--muted);
+}
+
+.quote figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.quote-name { margin-top: 14px; font-size: var(--fs-20); font-weight: 400; color: var(--ink); }
+.quote-role { margin-top: 6px; font-size: var(--fs-14); color: var(--soft-2); }
+.quote-at   { margin-top: 3px; font-size: var(--fs-14); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+
+.li-badge { display: inline-flex; }
+.li-badge svg { width: 15px; height: 15px; border-radius: 3px; }
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.cta { padding-block: clamp(40px, 5vw, 60px); }
+
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(32px, 3.4vw, 40px) var(--gutter);
+  border-radius: var(--radius-card);
+  background: linear-gradient(100deg, #030303 0%, #141414 52%, #2e2e2e 100%);
+  color: var(--bg-hero);
+}
+.cta-card h2 {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+.cta-card p {
+  margin-top: 14px;
+  max-width: 60ch;
+  font-size: var(--fs-16);
+}
+.cta-card .btn { margin-top: clamp(24px, 2.8vw, 32px); }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.site-footer { padding-block: clamp(40px, 5vw, 62px) clamp(24px, 3vw, 34px); }
+
+.footer-kicker { font-size: var(--fs-18); color: var(--ink); }
+
+.footer-chat {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: clamp(6px, 1vw, 14px);
+  margin-top: clamp(16px, 2.4vw, 30px);
+  color: var(--chat);
+  transition: color .25s var(--ease);
+}
+.footer-chat span {
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.chat-arrow {
+  width: clamp(24px, 3vw, 42px);
+  height: clamp(24px, 3vw, 42px);
+  margin-top: clamp(24px, 4.4vw, 62px);
+  color: var(--ink);
+  transition: transform .25s var(--ease);
+}
+.footer-chat:hover { color: var(--ink); }
+.footer-chat:hover .chat-arrow { transform: translate(5px, -5px); }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: clamp(40px, 5.5vw, 76px);
+  font-size: var(--fs-14);
+}
+
+.footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 30px; }
+.footer-links a { display: inline-flex; align-items: center; gap: 7px; }
+.footer-links a:first-child { text-decoration: underline; text-underline-offset: 3px; }
+.footer-links .at { color: var(--soft); text-decoration: none; }
+.footer-li { color: var(--soft-2); }
+.footer-li .ic { width: 17px; height: 17px; color: var(--ink); }
+.footer-links a:hover { color: var(--ink); }
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-weight: 500;
+  text-align: right;
+}
+.footer-copy { color: var(--soft-2); font-weight: 400; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+/* Tablet landscape — drop the decorative connectors in the flow */
+@media (max-width: 1024px) {
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 12px;
+    justify-items: center;
+  }
+  .flow-art { display: none; }
+}
+
+/* Tablet — stack project cards, text over media */
+@media (max-width: 900px) {
+  .project {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .project-media { order: 1; height: clamp(220px, 42vw, 340px); }
+  .project-body { order: 2; }
+  .project-title, .project-desc { max-width: 34ch; }
+
+  .collage {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    gap: 20px;
+    padding-inline: var(--gutter);
+  }
+  .collage-col { grid-template-rows: auto; }
+  .collage-col--right { margin-top: 0; }
+  .collage-col--center { grid-column: 1 / -1; order: -1; }
+  .collage figure { height: auto; aspect-ratio: 4 / 3; }
+  .collage-col--center figure { aspect-ratio: 16 / 10; }
+
+  .footer-meta { text-align: left; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .header-inner { min-height: 72px; }
+  .brand-name { font-size: 18px; }
+  .pill { height: 42px; padding: 0 14px; }
+  .pill-label { display: none; }
+  .pill .ic { width: 20px; height: 20px; }
+  /* Labels hide here, so all three pills collapse to icon-only circles.
+     Height stays 42px rather than shrinking — closer to the ~44px
+     touch-target guideline. Compact mode keeps that same floor: shrinking
+     further on mobile would drop the tap target below the guideline. */
+  .site-header.is-compact .pill { height: 42px; padding: 0 14px; font-size: var(--fs-14); }
+  .site-header.is-compact .header-inner { min-height: 60px; }
+
+  .hero-title, .hero-sub { max-width: 34ch; }
+  .hero-actions { width: 100%; }
+  .hero-actions .btn { flex: 1 1 100%; }
+
+  .flow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 16px;
+  }
+
+  .collage { grid-template-columns: 1fr; }
+  .collage figure { aspect-ratio: 3 / 2; }
+
+  .quote { flex: 1 1 100%; max-width: none; }
+
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-meta { flex-direction: column; gap: 4px; }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* Print */
+@media print {
+  .site-header, .scroll-cue, .collage { display: none; }
+  body { background: #fff; }
+}
