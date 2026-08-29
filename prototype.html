@@ -1,0 +1,975 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Follow-ups — lead intelligence prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --tx:#14181F; --tx2:#5B626D; --tx3:#8A9099;
+  --bg:#F4F5F7; --line:#EAECF0;
+  --blue:#2F6BF0; --green:#0F7B4F; --purple:#7B3FE4; --red:#E5322D; --amber:#F5B32B;
+  --green-bg:#F2FAF6; --purple-bg:#F8F5FE; --red-bg:#FEF5F4; --amber-bg:#FDF6E7;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;text-align:left}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hidden{display:none!important}
+
+.top{background:#fff;border-bottom:1px solid var(--line);padding:0 18px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:50}
+.brand{font-weight:700;font-size:16px;letter-spacing:-.02em;padding:14px 0;white-space:nowrap}
+.brand em{font-style:normal;color:var(--blue)}
+.roles{display:flex;gap:2px;margin-left:auto}
+.role-b{font-size:13px;padding:14px 13px;color:var(--tx3);border-bottom:2px solid transparent;transition:.15s}
+.role-b:hover{color:var(--tx2)}
+.role-b[aria-selected="true"]{color:var(--tx);border-bottom-color:var(--blue);font-weight:600}
+.tabs{display:flex;gap:3px;padding:0 18px;background:#fff;border-bottom:1px solid var(--line);
+  position:sticky;top:49px;z-index:40}
+.tab{font-size:13px;padding:11px 12px;color:var(--tx3);border-bottom:2px solid transparent}
+.tab[aria-selected="true"]{color:var(--tx);border-bottom-color:var(--tx);font-weight:600}
+main{max-width:1080px;margin:0 auto;padding:0 0 90px}
+
+.phone-wrap{display:flex;gap:34px;padding:26px 20px;align-items:flex-start;flex-wrap:wrap}
+.phone{width:390px;max-width:100%;background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 1px 3px rgba(20,24,31,.07),0 12px 34px rgba(20,24,31,.09);flex:none;padding-bottom:14px}
+.side{flex:1;min-width:250px;padding-top:8px}
+.side h2{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:9px}
+.side p{font-size:14px;color:var(--tx2);margin-bottom:14px;max-width:46ch}
+.k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx3);margin-bottom:9px}
+.side ul{list-style:none}
+.side li{font-size:13.5px;color:var(--tx2);padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line)}
+.side li:before{content:"+";position:absolute;left:0;color:var(--blue);font-weight:600}
+.side li b{color:var(--tx);font-weight:600}
+
+.hd{padding:20px 18px 14px;display:flex;align-items:center;gap:12px}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#F5B32B,#E5322D);flex:none}
+.hd-t small{display:block;font-size:13px;color:var(--tx3);line-height:1.2}
+.hd-t b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.hd-ic{margin-left:auto;display:flex;gap:14px;color:var(--tx2);font-size:17px}
+
+.bar{margin:0 14px 10px;border-radius:14px;padding:15px 17px;display:flex;
+  align-items:center;justify-content:space-between;gap:10px;width:calc(100% - 28px)}
+.bar b{font-size:16px;font-weight:600}
+.bar .n{font-size:17px;font-weight:700;display:flex;align-items:center;gap:7px}
+.b-new{background:var(--green-bg)} .b-new b,.b-new .n{color:var(--green)}
+.b-asg{background:var(--purple-bg)} .b-asg b,.b-asg .n{color:var(--purple)}
+.b-ovd{background:var(--red-bg)} .b-ovd b,.b-ovd .n{color:var(--red)}
+.bar.open{margin-bottom:2px}
+.chev{transition:.2s;display:inline-block}
+.bar.open .chev{transform:rotate(90deg)}
+.group{padding:6px 14px 12px;border-radius:14px;margin:0 14px 10px;width:calc(100% - 28px)}
+.g-new{background:var(--green-bg)} .g-asg{background:var(--purple-bg)} .g-ovd{background:var(--red-bg)}
+
+.lc{background:#fff;border-radius:14px;padding:15px 16px;margin-bottom:10px;width:100%;
+  box-shadow:0 1px 2px rgba(20,24,31,.06);transition:.14s;display:block}
+.lc:last-child{margin-bottom:0}
+.lc:hover{box-shadow:0 2px 10px rgba(20,24,31,.11)}
+.lc.done{opacity:.45}
+.lc-top{display:flex;gap:12px;align-items:flex-start}
+.lc-top>div:first-child{flex:1;min-width:0}
+.proj{font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.idline{margin-top:4px;font-size:13.5px;color:var(--tx3)}
+.idline a{color:var(--blue);text-decoration:underline;font-weight:500}
+.call{width:44px;height:44px;border-radius:50%;background:var(--blue);flex:none;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+
+.intent{margin-top:12px;padding:11px 13px;border-radius:9px;background:#FAFBFC;border-left:3px solid var(--blue)}
+.intent.hot{background:var(--amber-bg);border-left-color:var(--amber)}
+.intent.brow{background:var(--red-bg);border-left-color:var(--red)}
+.i-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tx3);margin-bottom:6px}
+.i-why{font-size:13px;color:var(--tx2);line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.tag{font-size:11px;padding:3px 8px;border-radius:5px;background:#EEF0F3;color:var(--tx2);font-weight:500}
+.tag.cap{background:#FBE9E8;color:#B0322C}
+.ev{font-family:var(--mono);font-size:11px;color:var(--tx3);margin-top:9px;
+  padding-left:10px;border-left:2px solid var(--line);line-height:1.6}
+.lc-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.stage{font-size:13.5px;color:var(--tx2);display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.d-amber{background:var(--amber)} .d-blue{background:var(--blue)}
+.clock{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px}
+.c-red{color:var(--red)} .c-amber{color:#D18E00} .c-grey{color:var(--tx2)}
+
+.slotrow{background:#fff;border-radius:14px;padding:16px 17px;margin:0 14px 10px;
+  width:calc(100% - 28px);display:flex;align-items:center;justify-content:space-between;
+  gap:10px;box-shadow:0 1px 2px rgba(20,24,31,.06);font-size:15px;transition:.14s}
+.slotrow:hover{box-shadow:0 2px 10px rgba(20,24,31,.11)}
+.slotrow[aria-selected="true"]{box-shadow:0 0 0 2px var(--blue)}
+.slotrow .n{font-weight:700;color:var(--tx2);display:flex;align-items:center;gap:7px}
+.slotrow .sub2{display:block;font-size:11.5px;color:var(--tx3);font-weight:400;margin-top:2px}
+.empty{padding:30px 18px;text-align:center;color:var(--tx3);font-size:13.5px}
+
+/* dashboard home */
+.hd-t small.tot{color:var(--tx3)}
+.dash{padding:0 14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
+.tile{border-radius:16px;padding:15px 16px 13px;min-height:112px;position:relative;
+  display:flex;flex-direction:column;transition:.14s;width:100%}
+.tile:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(20,24,31,.08)}
+.tile .tl{font-size:15px;font-weight:600;margin-bottom:auto}
+.tile .tn{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1;text-align:right}
+.t-new{background:var(--green-bg)} .t-new .tl,.t-new .tn{color:var(--green)}
+.t-asg{background:#EAF1FE} .t-asg .tl,.t-asg .tn{color:var(--blue)}
+.t-ovd{background:var(--red-bg)} .t-ovd .tl,.t-ovd .tn{color:var(--red)}
+.tile.tall{min-height:184px}
+.tile .gl{position:absolute;left:14px;bottom:12px;font-size:42px;opacity:.16;line-height:1}
+.slotcol{display:flex;flex-direction:column;gap:9px}
+.srow{border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:9px;
+  font-size:13.5px;font-weight:500;transition:.14s;width:100%}
+.srow:hover{filter:brightness(.97)}
+.srow .sn{margin-left:auto;font-size:16px;font-weight:700}
+.s-m{background:#FDF6E0;color:#8A6205} .s-a{background:#FDEEDC;color:#9A5A0B}
+.s-e{background:#F0ECFB;color:#4A3A8F} .s-n{background:#E9ECF9;color:#2A3A80}
+.backlist{padding:12px 16px 2px}
+.backlist button{font-size:13px;color:var(--blue);font-weight:600}
+
+/* AI briefing */
+.brief{background:#fff;border-radius:18px;padding:18px 17px 15px;margin:0 14px 12px;
+  box-shadow:0 1px 3px rgba(20,24,31,.07),0 6px 20px rgba(20,24,31,.05)}
+.ai-badge{display:inline-flex;align-items:center;gap:7px;background:#8FB6F7;color:#fff;
+  font-size:12px;font-weight:700;letter-spacing:.06em;padding:7px 15px;border-radius:20px;
+  margin-bottom:16px}
+.ai-badge i{width:7px;height:7px;border-radius:50%;background:#BFE6E0;display:block}
+.bsec{margin-bottom:17px}
+.bsec:last-of-type{margin-bottom:0}
+.bh{font-size:15.5px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.bitem{width:100%;display:block;text-align:left;padding:9px 11px;border-radius:9px;
+  margin-bottom:6px;transition:.13s;background:#FAFBFC}
+.bitem:last-child{margin-bottom:0}
+.bitem:hover{background:#F2F4F7}
+.bitem.urg{background:var(--red-bg)}
+.bitem.urg:hover{background:#FCE9E7}
+.bn{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px}
+.bn .arw{margin-left:auto;color:var(--tx3);font-size:14px}
+.bw{font-size:12.5px;color:var(--tx2);line-height:1.5;margin-top:4px}
+.bw em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--tx3)}
+.bnum{display:flex;gap:0;border-top:1px solid var(--line);padding-top:13px;margin-top:15px}
+.bnum div{flex:1;text-align:center;border-right:1px solid var(--line)}
+.bnum div:last-child{border-right:none}
+.bnum b{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em}
+.bnum span{font-size:10.5px;color:var(--tx3);display:block;margin-top:2px}
+.bnote{font-size:12px;color:var(--tx2);background:var(--amber-bg);border-left:3px solid var(--amber);
+  padding:10px 12px;border-radius:0 8px 8px 0;margin-top:12px;line-height:1.5}
+
+.scrim{position:fixed;inset:0;background:rgba(20,24,31,.42);z-index:60;opacity:0;
+  pointer-events:none;transition:.2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:#fff;z-index:61;
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dr-h{padding:19px 21px 15px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dr-x{font-size:23px;line-height:1;color:var(--tx3);padding:0 5px}
+.dr-b{padding:19px 21px 24px;overflow-y:auto;flex:1}
+.blk{margin-bottom:21px}
+.kv{display:flex;justify-content:space-between;gap:14px;padding:7px 0;
+  border-bottom:1px solid #F3F4F6;font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv span{color:var(--tx2)} .kv b{font-family:var(--mono);font-size:12.5px;font-weight:500;text-align:right}
+.say{background:var(--amber-bg);border-left:3px solid var(--amber);padding:13px 15px;
+  font-size:13.5px;color:#8A5D06;line-height:1.55;border-radius:0 8px 8px 0}
+.dr-f{padding:13px 21px;border-top:1px solid var(--line);display:flex;gap:9px}
+.btn{font-size:14px;font-weight:600;padding:12px 16px;border-radius:9px;transition:.15s;text-align:center}
+.btn-p{background:var(--blue);color:#fff;flex:1}
+.btn-p:hover{background:#255ACC}
+.btn-s{background:#EEF0F3;color:var(--tx2)}
+.ovrb{width:100%;margin-top:8px;font-size:12.5px;color:var(--tx3);padding:9px;text-align:center}
+.ovrb:hover{color:var(--red)}
+
+/* transcript */
+.calls{margin-top:4px}
+.callrow{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:11px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:8px;transition:.14s}
+.callrow:hover{background:#FAFBFC;border-color:#D9DDE4}
+.callrow .cd{font-size:13.5px;font-weight:500}
+.callrow .cm{font-size:11.5px;color:var(--tx3);margin-top:2px}
+.callrow .cs{font-family:var(--mono);font-size:12px;color:var(--tx2);white-space:nowrap}
+.back{font-size:12.5px;color:var(--blue);font-weight:500;padding:0}
+.turn{display:grid;grid-template-columns:52px 1fr;gap:11px;padding:9px 0;align-items:start}
+.spk{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx3);padding-top:3px}
+.spk.rm{color:var(--blue)}
+.line{font-size:13.5px;color:var(--tx2);line-height:1.55}
+.turn.mark .line{background:var(--amber-bg);border-left:3px solid var(--amber);
+  padding:8px 11px;border-radius:0 7px 7px 0;color:var(--tx)}
+.turn.flagged .line{background:var(--red-bg);border-left:3px solid var(--red);
+  padding:8px 11px;border-radius:0 7px 7px 0;color:var(--tx)}
+.pulled{font-family:var(--mono);font-size:10px;color:#8A5D06;margin-top:6px;
+  letter-spacing:.04em;display:block}
+.turn.flagged .pulled{color:var(--red)}
+.chk{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:8px 0;border-bottom:1px solid #F3F4F6;font-size:13.5px;color:var(--tx2)}
+.chk:last-child{border-bottom:none}
+.yes{color:var(--green);font-weight:600;font-size:13px}
+.no{color:var(--red);font-weight:600;font-size:13px}
+.scorebox{background:#FAFBFC;border-radius:10px;padding:14px 16px;margin-bottom:19px;
+  display:flex;justify-content:space-between;align-items:center;gap:14px}
+.scorebox .big{font-size:27px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.scorebox .lbl{font-size:12px;color:var(--tx3);margin-top:3px}
+.scorebox .rt{font-size:12.5px;color:var(--tx2);text-align:right;max-width:22ch;line-height:1.45}
+
+/* after-call sheet */
+.sheet-scrim{position:fixed;inset:0;background:rgba(20,24,31,.42);z-index:70;opacity:0;
+  pointer-events:none;transition:.2s}
+.sheet-scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:min(430px,100%);
+  background:#fff;z-index:71;border-radius:20px 20px 0 0;transition:transform .27s cubic-bezier(.4,0,.2,1);
+  max-height:92vh;overflow-y:auto;padding:20px 18px 26px}
+.sheet.on{transform:translate(-50%,0)}
+.sh-h{font-size:16px;font-weight:600;margin-bottom:2px}
+.sh-s{font-size:12.5px;color:var(--tx3);margin-bottom:16px}
+.days{display:flex;gap:4px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px}
+.day{flex:none;width:47px;text-align:center;padding:9px 0;border-radius:11px;transition:.14s}
+.day b{display:block;font-size:16px;font-weight:700;line-height:1.1}
+.day span{font-size:10.5px;color:var(--tx3)}
+.day[aria-selected="true"]{background:#EAF1FE}
+.day[aria-selected="true"] b,.day[aria-selected="true"] span{color:var(--blue)}
+.day .pip{width:5px;height:5px;border-radius:50%;background:var(--blue);margin:4px auto 0;opacity:0}
+.day[aria-selected="true"] .pip{opacity:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13.5px;font-weight:500;padding:9px 15px;border-radius:8px;
+  border:1px solid var(--blue);color:var(--blue);background:#fff;transition:.14s;position:relative}
+.chip[aria-selected="true"]{background:var(--blue);color:#fff}
+.chip.sugg:after{content:"suggested";position:absolute;top:-8px;right:-6px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.06em;background:var(--amber);
+  color:#5C3D00;padding:2px 5px;border-radius:4px}
+.why-slot{background:var(--amber-bg);border-left:3px solid var(--amber);padding:10px 13px;
+  font-size:12.5px;color:#8A5D06;line-height:1.5;border-radius:0 8px 8px 0;margin-bottom:16px}
+.fieldlab{font-size:12.5px;font-weight:600;margin-bottom:6px;display:flex;
+  justify-content:space-between;align-items:baseline;gap:10px}
+.fieldlab em{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--amber);font-weight:500}
+textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;
+  font-family:inherit;font-size:13.5px;line-height:1.55;color:var(--tx);resize:vertical;
+  min-height:104px;background:#FFFDF7}
+textarea:focus{outline:2px solid var(--blue);outline-offset:-1px;background:#fff}
+.pre-note{font-size:11.5px;color:var(--tx3);margin-top:7px;line-height:1.5}
+.sh-f{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.btn-w{width:100%;font-size:15px;font-weight:600;padding:14px;border-radius:10px;text-align:center}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#255ACC}
+.btn-out{border:1px solid var(--blue);color:var(--blue)}
+
+.pad{padding:24px 20px}
+h1{font-size:22px;font-weight:700;letter-spacing:-.025em;margin-bottom:4px}
+.sub{color:var(--tx2);font-size:14px;margin-bottom:18px;max-width:62ch}
+.panel{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(20,24,31,.06)}
+.rm-h{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:14px;padding:11px 17px;
+  background:#FAFBFC;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--tx3)}
+.rm-row{width:100%;display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:14px;
+  padding:15px 17px;border-top:1px solid var(--line);align-items:center;transition:.12s}
+.rm-row:first-of-type{border-top:none}
+.rm-row:hover{background:#FAFBFC}
+.rm-n{font-weight:600;font-size:15px}
+.rm-s{font-size:12px;color:var(--tx3)}
+.bar-b{height:5px;background:#EEF0F3;border-radius:3px;overflow:hidden;margin-top:5px}
+.bar-b i{display:block;height:100%;border-radius:3px;background:var(--blue)}
+.bar-b i.w{background:var(--amber)}
+.num{font-family:var(--mono);font-size:13px;color:var(--tx2)}
+.tier{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:6px}
+.t1{background:var(--green-bg);color:var(--green)}
+.t2{background:#EEF0F3;color:var(--tx2)}
+.t3{background:var(--red-bg);color:var(--red)}
+.note{background:var(--amber-bg);border-left:3px solid var(--amber);padding:13px 16px;
+  font-size:13.5px;color:#8A5D06;line-height:1.55;margin:14px 0;border-radius:0 8px 8px 0}
+.alert{padding:16px 17px;border-top:1px solid var(--line)}
+.alert:first-of-type{border-top:none}
+.al-t{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:9px}
+.conf{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px}
+.c-hi{background:var(--red-bg);color:var(--red)}
+.c-md{background:var(--amber-bg);color:#8A5D06}
+.c-lo{background:#EEF0F3;color:var(--tx2)}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn-sm{font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:7px;background:#EEF0F3;color:var(--tx2)}
+.btn-sm.res{background:var(--green-bg);color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:#fff;border-radius:12px;padding:16px 17px;box-shadow:0 1px 2px rgba(20,24,31,.06)}
+.stat .n{font-size:25px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.stat .n.bad{color:var(--red)}
+.stat .l{font-size:12px;color:var(--tx3);line-height:1.45}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx3);text-align:right;padding:11px 13px;background:#FAFBFC;
+  border-bottom:1px solid var(--line);font-weight:400;white-space:nowrap}
+thead th:first-child{text-align:left}
+td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:right;
+  font-family:var(--mono);font-size:12.5px;color:var(--tx2)}
+td:first-child{text-align:left;font-family:'Inter',sans-serif;font-size:14px;color:var(--tx);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+tr.flag td:first-child:after{content:"low volume";font-family:var(--mono);font-size:9.5px;
+  color:var(--tx3);margin-left:8px}
+td.good{color:var(--green)} td.bad{color:var(--red)}
+.hint{font-size:12.5px;color:var(--tx3);margin-top:12px;line-height:1.6;max-width:72ch}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,80px);
+  background:var(--tx);color:#fff;padding:12px 20px;border-radius:9px;font-size:13.5px;
+  z-index:80;opacity:0;transition:.24s;pointer-events:none}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media(max-width:760px){
+  .rm-row,.rm-h{grid-template-columns:1fr auto}
+  .rm-h span:nth-child(2),.rm-h span:nth-child(3),
+  .rm-row>div:nth-child(2),.rm-row>div:nth-child(3){display:none}
+  .phone-wrap{padding:16px 10px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="brand">Follow<em>·</em>ups</div>
+  <div class="roles" role="tablist">
+    <button class="role-b" role="tab" aria-selected="true" data-role="sales">Sales</button>
+    <button class="role-b" role="tab" aria-selected="false" data-role="manager">Manager</button>
+    <button class="role-b" role="tab" aria-selected="false" data-role="admin">Admin</button>
+  </div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+
+<main>
+  <div id="v-sales">
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="hd">
+          <div class="av"></div>
+          <div class="hd-t"><small class="tot">Total 9</small><b>Gulam Jilani</b></div>
+          <div class="hd-ic"><span>⌕</span><span>⚙</span></div>
+        </div>
+        <div id="app"></div>
+      </div>
+      <div class="side">
+        <div class="k">What changed</div>
+        <h2>Same shell. The screens now say why.</h2>
+        <p>The overview tiles, the four time slots and the card layout are unchanged — RMs already
+        know this app. The additions sit inside what was already there:</p>
+        <ul>
+          <li><b>On the overview,</b> a line that turns counts into a plan. Tiles say how much work; this says which work.</li>
+          <li><b>On each card,</b> a ranking reason, motivation and capacity tags extracted rather than typed, and the transcript line behind the reading.</li>
+          <li><b>In the log-call sheet,</b> a comment drafted from the call and a suggested slot with its reason — editing instead of typing.</li>
+        </ul>
+        <p style="margin-top:16px">The stage label stays. It answers a different question — where the
+        lead sits in the pipeline, not whether he's buying.</p>
+        <p>Tap a tile to open the list. Tap a card for the brief and its call transcripts. Tap the
+        blue phone button to see the after-call sheet.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="v-manager" class="hidden pad">
+    <div id="m-team">
+      <h1>Team</h1>
+      <p class="sub">Call quality and outcomes shown apart. A single score hides which one is broken.</p>
+      <div class="panel">
+        <div class="rm-h"><span>Relationship manager</span><span>Call quality</span><span>Visits attended</span><span>Tier</span></div>
+        <div id="rmlist"></div>
+      </div>
+      <div class="note"><strong>Read these together.</strong> Strong quality with weak outcomes usually
+      means poor lead allocation, not a poor RM. Weak quality with strong outcomes means someone is
+      riding hot leads and will fail when they dry up.</div>
+    </div>
+    <div id="m-alerts" class="hidden">
+      <h1>Conduct alerts</h1>
+      <p class="sub">Flagged from transcripts. Context is included because the flag is often wrong.</p>
+      <div class="panel" id="alertlist"></div>
+      <p class="hint">Every "Not an issue" is a correction the model learns from. Customer-initiated
+      conflict, code-switching between languages and regional phrasing all trigger false positives.</p>
+    </div>
+  </div>
+
+  <div id="v-admin" class="hidden pad">
+    <div id="a-quality">
+      <h1>Lead quality by source</h1>
+      <p class="sub">Measured from outcomes, not transcripts. This is the control variable for RM scoring.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">₹500–1,000</div><div class="l">Cost per lead, rising with project demand</div></div>
+        <div class="stat"><div class="n bad">₹4.1L</div><div class="l">Spent on leads closed without contact, 90 days</div></div>
+        <div class="stat"><div class="n">2h 40m</div><div class="l">Median first response — the race we keep losing</div></div>
+      </div>
+      <div class="panel">
+        <table><thead><tr><th>Source</th><th>Leads</th><th>Junk</th><th>Contacted</th><th>Site visit</th><th>Booked</th><th>Cost / booking</th></tr></thead>
+        <tbody id="srclist"></tbody></table>
+      </div>
+      <p class="hint">Cohorts measured at a 60-day horizon so young leads aren't compared against mature
+      ones. Sources under 40 leads are flagged — one booking out of four is 25%, and it will mislead
+      everyone who sees it.</p>
+    </div>
+    <div id="a-junk" class="hidden">
+      <h1>Junk and duplicates</h1>
+      <p class="sub">Cheapest thing to detect and the fastest money back. No model required.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">312</div><div class="l">Same number, multiple sources, 30 days</div></div>
+        <div class="stat"><div class="n">147</div><div class="l">Invalid or unreachable numbers</div></div>
+        <div class="stat"><div class="n">89</div><div class="l">Zero connects after 6 attempts</div></div>
+      </div>
+      <div class="panel">
+        <table><thead><tr><th>Pattern</th><th>Volume</th><th>Est. wasted spend</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Same last-10 digits across sources</td><td>312</td><td class="bad">₹2.4L</td><td>Merge, attribute to first</td></tr>
+          <tr><td>Number invalid on dial</td><td>147</td><td class="bad">₹1.1L</td><td>Reject at intake</td></tr>
+          <tr><td>Six attempts, zero connects</td><td>89</td><td class="bad">₹0.6L</td><td>Route to nurture, not RM</td></tr>
+          <tr><td>Out-of-region enquiry</td><td>64</td><td class="bad">₹0.5L</td><td>Reassign or drop</td></tr>
+        </tbody></table>
+      </div>
+      <p class="hint">Duplicate detection runs on the last ten digits because the same buyer enters with
+      and without country codes and prefixes across portals.</p>
+    </div>
+  </div>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Lead brief"></aside>
+<div class="sheet-scrim" id="shscrim"></div>
+<aside class="sheet" id="sheet" aria-hidden="true" aria-label="Log the call"></aside>
+<div class="toast" id="toast"></div>
+
+<script>
+var LEADS=[
+ {id:"2042168",sec:"new",slot:"morning",proj:"Godrej Reserve Kandivali",name:"Deepak Jhaveri",
+  stage:"Suspect",dot:"d-amber",clock:"03 Minutes",cc:"c-grey",rank:"hot",
+  why:"Landed 3 minutes ago and nobody has reached him. He gave a budget and a deadline on the form.",
+  tags:[["First home",0],["School proximity",0],["Loan running",1]],
+  cap:[["Stated budget","\u20b91.15\u20131.35 Cr"],["Existing loan","Yes \u2014 car, 14 mo left"],["Loan status","Pre-approval started"]],
+  cons:[["Location","Kandivali East"],["Possession","Before March"],["Floor","Above 7th"]],
+  eng:[["Volunteered constraints","3"],["Specific figures","Yes"],["Objections raised","1"],["Visits agreed / attended","\u2014"]],
+  ev:['"possession chahiye March se pehle, beti ka school shift ho raha hai"','"1.15 tak comfortable hoon, 1.35 stretch hai"'],
+  say:"Call now \u2014 you are likely the first. Lead with March possession and confirm the school is within 2 km."},
+ {id:"2042174",sec:"new",slot:"morning",proj:"Godrej Reserve Kandivali",name:"Faisal Sheikh",
+  stage:"Suspect",dot:"d-amber",clock:"08 Minutes",cc:"c-grey",rank:"hot",
+  why:"Named the decision-maker unprompted and asked for a Sunday slot himself.",
+  tags:[["First home",0],["Office proximity",0]],
+  cap:[["Stated budget","\u20b970\u201380L"],["Existing loan","No"],["Loan status","Bank shortlisted"]],
+  cons:[["Location","Kurla to Ghatkopar"],["Timeline","Within 3 months"],["Family","Wife decides on layout"]],
+  eng:[["Volunteered constraints","3"],["Specific figures","Yes"],["Objections raised","2"],["Visits agreed / attended","\u2014"]],
+  ev:['"Sunday ko wife ke saath aa sakta hoon, subah 11 baje"','"currently rent pe hoon, 32 hazar ja raha hai har mahine"'],
+  say:"He proposed the visit himself. Lock Sunday 11am now and confirm his wife is coming."},
+ {id:"2042190",sec:"new",slot:"morning",proj:"Lodha Amara Thane",name:"Nikhil Bhosale",
+  stage:"Suspect",dot:"d-amber",clock:"14 Minutes",cc:"c-amber",rank:"brow",
+  why:"Ninth enquiry across four brokerages in two weeks. Collecting brochures, not shortlisting.",
+  tags:[["No stated constraint",0]],
+  cap:[["Stated budget","Changes each call"],["Existing loan","Not discussed"],["Loan status","Not discussed"]],
+  cons:[["Location","Changed 3 times"],["Timeline","Not stated"],["Floor","No preference"]],
+  eng:[["Volunteered constraints","0"],["Specific figures","Inconsistent"],["Objections raised","0"],["Visits agreed / attended","0 / 0"]],
+  ev:['Budget stated as 45L, then 90L, then "dekhte hain" across 3 calls','9 project enquiries in 14 days'],
+  say:"Send the brochure by message. Do not spend a call slot until he replies."},
+ {id:"2041877",sec:"assigned",slot:"morning",proj:"Godrej Reserve Kandivali",name:"Priya Nair",
+  stage:"Opportunity",dot:"d-blue",clock:"6 days",cc:"c-red",rank:"hot",
+  why:"Asked about rental yield twice and pushed back on price \u2014 objections, not agreement. Untouched for six days.",
+  tags:[["Investment",0],["Second purchase",0]],
+  cap:[["Stated budget","\u20b985L\u20131 Cr"],["Existing loan","No"],["Loan status","Self-funded, partial"]],
+  cons:[["Location","Powai or Chandivali"],["Timeline","Flexible"],["Priority","Rental yield"]],
+  eng:[["Volunteered constraints","2"],["Specific figures","Yes"],["Objections raised","3"],["Visits agreed / attended","1 / 1"]],
+  ev:['"rental kitna milega monthly, aur maintenance alag hai kya?"','"price thoda high lag raha hai is floor ke liye"'],
+  say:"Six days is too long on a live investor. Bring rental comparables before she calls someone else.",
+  calls:[
+   {d:"Call 3 \u00b7 8 Jan, 6:40 pm",m:"9 min 05 sec \u00b7 Aarti Deshmukh",score:"4 of 5",
+    checks:[["Probed budget",1],["Probed timeline",1],["Identified decision-maker",0],["Handled objections",1],["Explained project accurately",1]],
+    read:"Strong call. Client volunteered budget, priority and two objections. Decision-maker never established \u2014 the one gap.",
+    turns:[
+     ["rm","Ma'am, Godrej Reserve ke baare mein aapne enquiry ki thi."],
+     ["cl","Haan, main investment ke liye dekh rahi hoon. Rehne ke liye nahi.","Motivation: investment",1],
+     ["rm","Samajh gaya ma'am. Kya budget range consider kar rahi hain?"],
+     ["cl","85 lakh se 1 crore. Usse upar nahi jaana chahti.","Capacity: \u20b985L\u20131 Cr, stated",1],
+     ["rm","Perfect. Is project mein 2 BHK us range mein aa jaayega."],
+     ["cl","Rental kitna milega monthly, aur maintenance alag hai kya?","Priority: rental yield",1],
+     ["rm","Ma'am is area mein 2 BHK 38 se 42 hazar tak nikal jaata hai. Maintenance alag hai, roughly 4,500."],
+     ["cl","Price thoda high lag raha hai is floor ke liye. 8th floor pe itna?","Objection raised \u2014 price",1],
+     ["rm","Ma'am upper floors ki demand zyada hai, isliye premium hai. Lower floor mein 6 lakh kam ho jaata hai."],
+     ["cl","Achha. Aur possession kab tak hai?"],
+     ["rm","December 2027 ma'am."],
+     ["cl","Theek hai, mujhe koi jaldi nahi hai, investment hai.","Timeline: flexible",1]
+    ]}
+  ]},
+ {id:"2041640",sec:"assigned",slot:"afternoon",proj:"Lodha Amara Thane",name:"Rohit Kadam",
+  stage:"Suspect",dot:"d-amber",clock:"4 days",cc:"c-amber",rank:"warm",
+  why:"Real constraint, wrong inventory. His ceiling is below anything available in this project.",
+  tags:[["First home",0],["Loan running",1]],
+  cap:[["Stated budget","\u20b955\u201362L"],["Existing loan","Yes \u2014 personal, 28 mo left"],["Loan status","Eligibility uncertain"]],
+  cons:[["Location","Dombivli, Kalyan"],["Timeline","6\u20138 months"],["Floor","Any"]],
+  eng:[["Volunteered constraints","2"],["Specific figures","Yes"],["Objections raised","1"],["Visits agreed / attended","1 / 0"]],
+  ev:['"personal loan chal raha hai, EMI 18 hazar"','"62 se upar nahi ja sakta bilkul"'],
+  say:"He is a buyer, wrong project. Move him to the Kalyan inventory rather than closing the lead."},
+ {id:"2039104",sec:"assigned",slot:"afternoon",proj:"Godrej Reserve Kandivali",name:"Sandeep Rane",
+  stage:"Suspect",dot:"d-amber",clock:"2 days",cc:"c-grey",rank:"warm",
+  why:"Clear on location, vague on money across two calls. One call to establish budget before spending a site visit.",
+  tags:[["Office proximity",0],["Budget unstated",1]],
+  cap:[["Stated budget","Not given"],["Existing loan","Unknown"],["Loan status","Not discussed"]],
+  cons:[["Location","Andheri East only"],["Timeline","Not stated"],["Floor","No preference"]],
+  eng:[["Volunteered constraints","1"],["Specific figures","No"],["Objections raised","0"],["Visits agreed / attended","0 / 0"]],
+  ev:['"Andheri side hi chahiye, office wahi hai"','No figure given across 2 connected calls'],
+  say:"Do not offer a site visit yet. Ask the budget question directly \u2014 everything else is decided."},
+ {id:"2038550",sec:"overdue",slot:"afternoon",proj:"Lodha Amara Thane",name:"Mehul Shah",
+  stage:"Site Visit",dot:"d-blue",clock:"60 Minutes",cc:"c-red",rank:"brow",
+  why:"Agreed to three site visits, attended none. Friendly on every call. No budget, no timeline, no objections.",
+  tags:[["No stated constraint",0]],
+  cap:[["Stated budget","Not given"],["Existing loan","Not discussed"],["Loan status","Not discussed"]],
+  cons:[["Location","Open"],["Timeline","Not stated"],["Floor","No preference"]],
+  eng:[["Volunteered constraints","0"],["Specific figures","No"],["Objections raised","0"],["Visits agreed / attended","3 / 0"]],
+  ev:['"haan sir bilkul, Sunday aata hoon" \u2014 said on 3 separate calls','7 calls, all connected, 0 constraints volunteered'],
+  say:"Seven connected calls have produced nothing. Send one message, not a call. If he wants it, he will reply.",
+  calls:[
+   {d:"Call 7 \u00b7 Yesterday, 3:04 pm",m:"4 min 12 sec \u00b7 Rajesh Pawar",score:"2 of 5",
+    checks:[["Probed budget",0],["Probed timeline",0],["Identified decision-maker",0],["Handled objections",1],["Explained project accurately",1]],
+    read:"Warm call, no new information. Seventh consecutive call where the client agreed to everything and volunteered nothing. Engagement quality unchanged.",
+    turns:[
+     ["rm","Sir namaste, Rajesh here from the Lodha Amara site. Kaise hain aap?"],
+     ["cl","Haan haan bilkul theek, boliye."],
+     ["rm","Sir last time humne Sunday ki baat ki thi, aap aa nahi paaye."],
+     ["cl","Arre haan yaar, thoda kaam nikal aaya tha. Is Sunday pakka aata hoon.","Third visit committed \u2014 zero attended",1],
+     ["rm","Sure sir. Aap 2 BHK dekhna chahenge ya 3?"],
+     ["cl","Dono dikha dijiye, koi problem nahi."],
+     ["rm","Budget ka koi range bataiye toh main uske hisaab se shortlist kar leta hoon."],
+     ["cl","Haan wo dekhte hain sir, aap achha option dikhaiye pehle.","Budget deflected \u2014 4th time",1],
+     ["rm","Theek hai sir. Possession December 2027 hai, aapko koi timeline ki dikkat toh nahi?"],
+     ["cl","Nahi nahi, koi jaldi nahi hai. Aaram se dekhenge.","No timeline constraint volunteered",1],
+     ["rm","Perfect sir, main Sunday ke liye slot block karta hoon."],
+     ["cl","Haan bilkul, kar dijiye."]
+    ]},
+   {d:"Call 5 \u00b7 12 Jan, 11:20 am",m:"3 min 40 sec \u00b7 Rajesh Pawar",score:"2 of 5",
+    checks:[["Probed budget",1],["Probed timeline",0],["Identified decision-maker",0],["Handled objections",0],["Explained project accurately",1]],
+    read:"Budget question asked and deflected. Same pattern as calls 3 and 4.",
+    turns:[
+     ["rm","Sir, Sunday ka plan bana?"],
+     ["cl","Sunday thoda tight hai, next week dekhte hain."],
+     ["rm","Koi baat nahi sir. Ek baar budget bata dete toh main ready rakhta."],
+     ["cl","Wo baad mein decide karenge, abhi bas dekh raha hoon.","Explicitly exploring, not buying",1]
+    ]}
+  ]},
+ {id:"2040155",sec:"overdue",slot:"evening",proj:"Godrej Reserve Kandivali",name:"Anjali Verma",
+  stage:"Opportunity",dot:"d-blue",clock:"45 Minutes",cc:"c-red",rank:"hot",
+  why:"Picks up only after 7pm. Two daytime attempts unanswered; the evening call connected in 12 seconds.",
+  tags:[["First home",0],["School proximity",0]],
+  cap:[["Stated budget","\u20b990L\u20131.1 Cr"],["Existing loan","No"],["Loan status","Approved"]],
+  cons:[["Location","Powai"],["Possession","Ready to move"],["Family","2 children, school fixed"]],
+  eng:[["Volunteered constraints","4"],["Specific figures","Yes"],["Objections raised","2"],["Visits agreed / attended","1 / 1"]],
+  ev:['"din mein clinic pe rehti hoon, shaam ko baat kar sakti hoon"','"school change nahi karna hai, wahi area chahiye"'],
+  say:"Loan approved and one visit attended. Ask for the second visit with her husband."},
+ {id:"2040044",sec:"overdue",slot:"night",proj:"Lodha Amara Thane",name:"Karan Malhotra",
+  stage:"Site Visit",dot:"d-blue",clock:"30 Minutes",cc:"c-red",rank:"hot",
+  why:"Works night shifts. The only two connects in his history were after 10pm.",
+  tags:[["Investment",0],["Second purchase",0]],
+  cap:[["Stated budget","\u20b91.4\u20131.6 Cr"],["Existing loan","Yes \u2014 home, serviced"],["Loan status","Pre-approved"]],
+  cons:[["Location","BKC corridor"],["Timeline","This quarter"],["Priority","Capital appreciation"]],
+  eng:[["Volunteered constraints","3"],["Specific figures","Yes"],["Objections raised","2"],["Visits agreed / attended","2 / 2"]],
+  ev:['"raat 10 ke baad hi free hota hoon, night shift hai"','"appreciation dekhna hai, rental secondary"'],
+  say:"Two visits attended and pre-approved. He is close \u2014 ask what is holding the decision."}
+];
+
+var RMS=[
+ {n:"Aarti Deshmukh",q:71,sv:"9 / 24",tier:"Top",tc:"t1",
+  mix:"68% of her leads came from the two sources with the lowest historical site-visit rate. Outcomes below team median are consistent with allocation, not conversation quality.",
+  bars:[["Probed budget",81],["Probed timeline",74],["Identified decision-maker",38],["Handled objections",66],["Explained project accurately",92]],
+  out:[["Calls placed","412"],["Connect rate","61%"],["Site visits booked","24"],["Site visits attended","9"],["Bookings","2"],["Median first response","3h 40m"]]},
+ {n:"Vikram Sethi",q:88,sv:"19 / 26",tier:"Top",tc:"t1",
+  mix:"Lead mix close to team average. Scores are comparable without adjustment.",
+  bars:[["Probed budget",94],["Probed timeline",89],["Identified decision-maker",77],["Handled objections",85],["Explained project accurately",95]],
+  out:[["Calls placed","388"],["Connect rate","69%"],["Site visits booked","26"],["Site visits attended","19"],["Bookings","6"],["Median first response","51m"]]},
+ {n:"Neha Kulkarni",q:44,sv:"14 / 18",tier:"Middle",tc:"t2",
+  mix:"Strong outcomes on a favourable mix \u2014 61% referral and walk-in. Watch this one: conversation quality is well below team, so results may not hold if the mix changes.",
+  bars:[["Probed budget",52],["Probed timeline",39],["Identified decision-maker",31],["Handled objections",40],["Explained project accurately",58]],
+  out:[["Calls placed","301"],["Connect rate","74%"],["Site visits booked","18"],["Site visits attended","14"],["Bookings","5"],["Median first response","1h 20m"]]},
+ {n:"Rajesh Pawar",q:59,sv:"6 / 21",tier:"Middle",tc:"t2",
+  mix:"Average lead mix. Quality is mid-range; the gap between visits booked and attended is the thing to work on.",
+  bars:[["Probed budget",68],["Probed timeline",61],["Identified decision-maker",44],["Handled objections",51],["Explained project accurately",71]],
+  out:[["Calls placed","356"],["Connect rate","58%"],["Site visits booked","21"],["Site visits attended","6"],["Bookings","1"],["Median first response","4h 15m"]]},
+ {n:"Sneha Iyer",q:34,sv:"3 / 11",tier:"Needs coaching",tc:"t3",
+  mix:"Average lead mix, so allocation does not explain this. Joined 7 weeks ago \u2014 coach on budget and timeline questions before changing her allocation.",
+  bars:[["Probed budget",41],["Probed timeline",28],["Identified decision-maker",19],["Handled objections",26],["Explained project accurately",48]],
+  out:[["Calls placed","198"],["Connect rate","55%"],["Site visits booked","11"],["Site visits attended","3"],["Bookings","0"],["Median first response","6h 05m"]]}
+];
+
+var ALERTS=[
+ {rm:"Rajesh Pawar",lead:"#2039455",when:"Yesterday, 4:12 pm",conf:"High",cc:"c-hi",
+  q:'"Aap decide nahi kar paa rahe ho toh time waste mat karo mera"',
+  ctx:"Customer had rescheduled twice. RM opened the call with this line \u2014 no prior provocation in the transcript."},
+ {rm:"Neha Kulkarni",lead:"#2040012",when:"2 days ago, 11:40 am",conf:"Low \u2014 likely false positive",cc:"c-lo",
+  q:'"Sir aap chillaiye mat, main sun rahi hoon"',
+  ctx:"Customer was shouting for 40 seconds before this. RM is de-escalating, not being rude. Flagged on keyword match.",
+  turns:[
+   ["cl","Aapke logon ne mujhe teen baar galat rate bataya hai!"],
+   ["rm","Sir main check karti hoon\u2014"],
+   ["cl","Kya check karogi? Roz same baat! Mera time waste ho raha hai, samjhi?"],
+   ["rm","Sir aap chillaiye mat, main sun rahi hoon.","Flagged on keyword match",2],
+   ["rm","Aap bataiye kaunsa rate quote hua tha, main abhi correct karwati hoon."],
+   ["cl","72 bola tha, ab 78 bol rahe ho."],
+   ["rm","Sir wo floor difference hai. Main aapko 72 wala unit dikhati hoon, wo abhi available hai."],
+   ["cl","Achha... theek hai, bhej do details."]
+  ]},
+ {rm:"Sneha Iyer",lead:"#2039801",when:"3 days ago, 6:55 pm",conf:"Medium",cc:"c-md",
+  q:'"Ye budget mein kuch nahi milega, aap samajh nahi rahe"',
+  ctx:"Factually accurate, delivered dismissively. Coaching moment rather than a conduct issue."}
+];
+
+var SOURCES=[
+ {s:"Referral",l:118,j:"2%",c:"84%",v:"41%",b:"9.3%",cpb:"\u20b96,400",good:1},
+ {s:"Walk-in",l:64,j:"1%",c:"91%",v:"52%",b:"11.0%",cpb:"\u20b90",good:1},
+ {s:"Google Search",l:1420,j:"14%",c:"48%",v:"11%",b:"1.8%",cpb:"\u20b947,200"},
+ {s:"Meta Ads",l:980,j:"22%",c:"39%",v:"7%",b:"0.9%",cpb:"\u20b982,600",bad:1},
+ {s:"Portal \u2014 listing A",l:610,j:"18%",c:"44%",v:"9%",b:"1.4%",cpb:"\u20b958,900"},
+ {s:"Portal \u2014 listing B",l:287,j:"31%",c:"31%",v:"4%",b:"0.6%",cpb:"\u20b91,24,000",bad:1},
+ {s:"Builder handover",l:31,j:"6%",c:"77%",v:"29%",b:"6.5%",cpb:"\u20b911,200",flag:1}
+];
+
+var NEXT={
+ "2042168":{slot:"morning",day:1,why:"He said the school shift is before March and he answered the form at 9am. Morning fits his stated routine.",
+  draft:"Budget 1.15\u20131.35 Cr, stretch at the top end. Car loan running, 14 months left, pre-approval started. Needs possession before March \u2014 daughter's school shift. Wants above 7th floor, Kandivali East. Sending 3 BHK options with March-ready possession."},
+ "2042174":{slot:"evening",day:2,why:"He asked for Sunday 11am with his wife. Evening call to confirm before the weekend.",
+  draft:"Budget 70\u201380L. No existing loan, bank shortlisted. Currently paying 32k rent, wants to buy within 3 months. Kurla\u2013Ghatkopar corridor. Wife decides on layout \u2014 confirmed both coming Sunday 11am for site visit."},
+ "2042190":{slot:"morning",day:14,why:"Ninth enquiry in two weeks, budget changed three times. A call now costs a slot and returns nothing \u2014 park him and let him come back.",
+  draft:"No firm budget \u2014 quoted 45L, then 90L, then undecided across three calls. Location changed three times. No timeline given. Brochure sent on WhatsApp. Parking for two weeks; will revisit only if he initiates."},
+ "2041877":{slot:"evening",day:0,why:"Six days untouched on a live investor. She last connected at 6:40pm.",
+  draft:"Investment purchase, budget 85L\u20131 Cr, self-funded in part. Priority is rental yield, timeline flexible. Raised price objection on 8th floor \u2014 quoted lower-floor alternative at 6L less. Sending rental comparables for Powai/Chandivali before next call."},
+ "2041640":{slot:"afternoon",day:3,why:"He is a buyer in the wrong project. Next call should be about Kalyan inventory, not this one.",
+  draft:"Budget hard ceiling 62L. Personal loan running, EMI 18k, 28 months left \u2014 eligibility uncertain. Dombivli/Kalyan preferred, 6\u20138 month timeline. Current project inventory starts above his ceiling. Moving him to Kalyan listings."},
+ "2039104":{slot:"afternoon",day:1,why:"Two calls without a budget figure. One direct question before any site visit is offered.",
+  draft:"Andheri East only \u2014 office location fixed, confirmed across two calls. No budget figure given yet despite being asked. No timeline stated. Next call: establish budget range before offering a site visit."},
+ "2038550":{slot:"morning",day:21,why:"Seven connected calls, three visits committed, none attended. Another call spends a slot on a pattern that hasn't changed.",
+  draft:"Seventh consecutive call with no new information. Budget deflected four times. Third site visit committed, none attended. No timeline, no constraints volunteered. Moving to message-only nurture; will re-engage if he replies."},
+ "2040155":{slot:"evening",day:1,why:"Two daytime attempts went unanswered. The evening call connected in 12 seconds \u2014 she is at her clinic during the day.",
+  draft:"Budget 90L\u20131.1 Cr, home loan approved. Powai only \u2014 children's school fixed, will not change area. Wants ready-to-move. One site visit attended. Next call to fix second visit with husband. Reachable after 7pm only."},
+ "2040044":{slot:"night",day:1,why:"Night shift worker. Both successful connects in his history were after 10pm.",
+  draft:"Investment, budget 1.4\u20131.6 Cr, pre-approved, existing home loan serviced. BKC corridor, closing this quarter. Priority is capital appreciation over rental. Two site visits attended. Next call: identify what is holding the decision."}
+};
+
+var role="sales",view="home",openSec="new",slot=null,mtab="team",atab="quality",done={},ovr={},res={};
+var TABS={sales:[],manager:[["team","Team"],["alerts","Conduct alerts"]],
+          admin:[["quality","Lead quality"],["junk","Junk & duplicates"]]};
+var SECS=[["new","New","b-new","g-new"],["assigned","Assigned","b-asg","g-asg"],["overdue","Overdue","b-ovd","g-ovd"]];
+var SLOTS=[["morning","Morning","06:00 AM to 11:59 AM"],["afternoon","Afternoon","12:00 PM to 04:59 PM"],
+           ["evening","Evening","05:00 PM to 08:59 PM"],["night","Night Owl","09:00 PM to 04:59 AM"]];
+function el(i){return document.getElementById(i)}
+function kv(k){return '<div class="kv"><span>'+k[0]+'</span><b>'+k[1]+'</b></div>'}
+
+function card(l){
+  var r=l.rank==="hot"?"hot":l.rank==="brow"?"brow":"";
+  return '<button class="lc'+(done[l.id]?" done":"")+'" data-id="'+l.id+'">'
+  +'<div class="lc-top"><div><div class="proj">'+l.proj+'</div>'
+  +'<div class="idline"><a>#'+l.id+'</a> &nbsp;'+l.name+'</div></div>'
+  +'<span class="call" data-callbtn="'+l.id+'">\u2706</span></div>'
+  +'<div class="intent '+r+'"><div class="i-lab">'
+    +(ovr[l.id]?"Corrected by you":l.rank==="hot"?"Committed buyer":l.rank==="brow"?"Browsing":"Exploring")
+    +'</div><div class="i-why">'+l.why+'</div><div class="tags">'
+    +l.tags.map(function(t){return '<span class="tag'+(t[1]?" cap":"")+'">'+t[0]+'</span>'}).join("")
+    +'</div><div class="ev">'+l.ev[0]+'</div></div>'
+  +'<div class="lc-foot"><span class="stage"><i class="dot '+l.dot+'"></i>'+l.stage+'</span>'
+  +'<span class="clock '+l.cc+'">\u25d5 '+(done[l.id]?"Called":l.clock)+'</span></div></button>';
+}
+
+function renderHome(){
+  var cnt={},tot=LEADS.length;
+  SECS.forEach(function(s){cnt[s[0]]=LEADS.filter(function(l){return l.sec===s[0]}).length});
+  var sc={};SLOTS.forEach(function(s){sc[s[0]]=LEADS.filter(function(l){return l.slot===s[0]}).length});
+
+  el("app").innerHTML='<div class="dash">'
+   +'<div class="brief">'
+     +'<span class="ai-badge"><i></i>AI INSIGHT</span>'
+     +'<div class="bsec"><div class="bh">\u23f0 Expiring first</div>'
+       +'<button class="bitem urg" data-open="2042190"><span class="bn">Nikhil Bhosale'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Tagging expires in 2 days. Nine enquiries across four brokerages \u2014 '
+         +'decide whether to hold him or release the tag.</span></button>'
+       +'<button class="bitem urg" data-open="2041877"><span class="bn">Priya Nair'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Six days untouched and she is comparing. Every day here is a day a '
+         +'competitor is calling her.</span></button>'
+     +'</div>'
+     +'<div class="bsec"><div class="bh">\u{1F3AF} Call these first</div>'
+       +'<button class="bitem" data-open="2042168"><span class="bn">Deepak Jhaveri'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Landed 3 minutes ago, nobody has reached him. '
+         +'<em>March possession \u00b7 1.15\u20131.35 Cr</em></span></button>'
+       +'<button class="bitem" data-open="2042174"><span class="bn">Faisal Sheikh'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Asked for Sunday 11am himself. Lock the slot and confirm his wife. '
+         +'<em>70\u201380L \u00b7 bank shortlisted</em></span></button>'
+       +'<button class="bitem" data-open="2040044"><span class="bn">Karan Malhotra'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Two visits attended, pre-approved. Ask what is holding the decision. '
+         +'<em>Reachable after 10pm</em></span></button>'
+     +'</div>'
+     +'<div class="bsec"><div class="bh">\u{1F4B0} Don\u2019t spend today on</div>'
+       +'<button class="bitem" data-open="2038550"><span class="bn">Mehul Shah'
+         +'<span class="arw">\u203a</span></span>'
+         +'<span class="bw">Seven connected calls, three visits committed, none attended. '
+         +'Send a message instead.</span></button>'
+     +'</div>'
+     +'<div class="bnum">'
+       +'<div><b>316</b><span>Calls</span></div>'
+       +'<div><b>289</b><span>Minutes</span></div>'
+       +'<div><b>0:55</b><span>Avg length</span></div>'
+       +'<div><b>57</b><span>Leads</span></div>'
+     +'</div>'
+     +'<div class="bnote"><strong>Yesterday:</strong> 55 seconds average across 316 calls means most '
+     +'did not connect. Your evening and night-owl slots connect at three times the rate \u2014 '
+     +'move the ringing leads there.</div>'
+   +'</div>'
+   +'<div class="tiles">'
+     +'<button class="tile t-new" data-go="new"><span class="tl">New</span>'
+       +'<span class="gl">\u2726</span><span class="tn">'+String(cnt.new).padStart(2,"0")+'</span></button>'
+     +'<button class="tile t-asg" data-go="assigned"><span class="tl">Assigned</span>'
+       +'<span class="gl">\u25cc</span><span class="tn">'+String(cnt.assigned).padStart(2,"0")+'</span></button>'
+   +'</div>'
+   +'<div class="tiles" style="align-items:start">'
+     +'<button class="tile t-ovd tall" data-go="overdue"><span class="tl">Overdue</span>'
+       +'<span class="gl">\u25f4</span><span class="tn">'+String(cnt.overdue).padStart(2,"0")+'</span></button>'
+     +'<div class="slotcol">'
+       +'<button class="srow s-m" data-goslot="morning">\u2600 Morning<span class="sn">'+sc.morning+'</span></button>'
+       +'<button class="srow s-a" data-goslot="afternoon">\u2600 Afternoon<span class="sn">'+sc.afternoon+'</span></button>'
+       +'<button class="srow s-e" data-goslot="evening">\u25d1 Evening<span class="sn">'+sc.evening+'</span></button>'
+       +'<button class="srow s-n" data-goslot="night">\u263e Night Owl<span class="sn">'+sc.night+'</span></button>'
+     +'</div>'
+   +'</div>'
+   +'</div>';
+}
+
+function render(){
+  if(view==="home"){renderHome();return}
+  var h='<div class="backlist"><button data-home="1">\u2190 Back to overview</button></div>';
+  SECS.forEach(function(s){
+    var rows=LEADS.filter(function(l){return l.sec===s[0] && (!slot||l.slot===slot)});
+    var isOpen=openSec===s[0];
+    h+='<button class="bar '+s[2]+(isOpen?' open':'')+'" data-sec="'+s[0]+'"><b>'+s[1]+'</b>'
+      +'<span class="n">'+rows.length+' <span class="chev">\u203a</span></span></button>';
+    if(isOpen){
+      h+='<div class="group '+s[3]+'">'
+        +(rows.length?rows.map(card).join(""):'<div class="empty">Nothing here in this slot.</div>')
+        +'</div>';
+    }
+  });
+  SLOTS.forEach(function(s){
+    var n=LEADS.filter(function(l){return l.slot===s[0]}).length;
+    h+='<button class="slotrow" data-slot="'+s[0]+'" aria-selected="'+(slot===s[0])+'">'
+      +'<span>'+s[1]+'<span class="sub2">'+s[2]+'</span></span>'
+      +'<span class="n">'+n+' <span>\u203a</span></span></button>';
+  });
+  el("app").innerHTML=h;
+}
+
+function openLead(id){
+  var l=LEADS.find(function(x){return x.id===id}); if(!l)return;
+  el("drawer").innerHTML='<div class="dr-h"><div><div style="font-size:17px;font-weight:600">'+l.name+'</div>'
+   +'<div class="idline">'+l.proj+' \u00b7 #'+l.id+'</div></div>'
+   +'<button class="dr-x" id="drx" aria-label="Close">\u00d7</button></div><div class="dr-b">'
+   +'<div class="blk"><div class="say">'+l.say+'</div></div>'
+   +'<div class="blk"><div class="i-lab">Motivation</div><div class="tags">'
+     +l.tags.map(function(t){return '<span class="tag'+(t[1]?" cap":"")+'">'+t[0]+'</span>'}).join("")+'</div></div>'
+   +'<div class="blk"><div class="i-lab">Capacity</div>'+l.cap.map(kv).join("")+'</div>'
+   +'<div class="blk"><div class="i-lab">Constraints</div>'+l.cons.map(kv).join("")+'</div>'
+   +'<div class="blk"><div class="i-lab">Engagement quality</div>'+l.eng.map(kv).join("")+'</div>'
+   +'<div class="blk"><div class="i-lab">Evidence from calls</div>'
+     +l.ev.map(function(e){return '<div class="ev" style="margin-bottom:9px">'+e+'</div>'}).join("")+'</div>'
+   +(l.calls?'<div class="blk"><div class="i-lab">Call history \u2014 open to read the transcript</div>'
+     +'<div class="calls">'+l.calls.map(function(c,ci){
+        return '<button class="callrow" data-tr="'+l.id+'" data-ci="'+ci+'">'
+        +'<span><span class="cd">'+c.d+'</span><span class="cm">'+c.m+'</span></span>'
+        +'<span class="cs">'+c.score+'</span></button>'}).join("")+'</div></div>':'')
+   +'<button class="ovrb" id="ov">This reading is wrong \u2192</button></div>'
+   +'<div class="dr-f"><button class="btn btn-p" id="mk">Mark called</button>'
+   +'<button class="btn btn-s" id="rs">Reschedule</button></div>';
+  el("drawer").classList.add("on");el("drawer").setAttribute("aria-hidden","false");
+  el("scrim").classList.add("on");
+  el("drx").onclick=shut;
+  el("mk").onclick=function(){shut();shSlot=null;shDay=null;openSheet(l.id)};
+  el("rs").onclick=function(){shut();toast("Rescheduled to evening slot")};
+  el("ov").onclick=function(){ovr[l.id]=1;render();shut();
+    toast("Correction saved \u2014 this is training signal, not a dismissal")};
+}
+function shut(){el("drawer").classList.remove("on");el("drawer").setAttribute("aria-hidden","true");
+  el("scrim").classList.remove("on")}
+
+/* ── after-call sheet ── */
+var SLOTNAME={morning:"Morning",afternoon:"Afternoon",evening:"Evening",night:"Night Owl"};
+var shLead=null,shSlot=null,shDay=null;
+function shutSheet(){el("sheet").classList.remove("on");el("sheet").setAttribute("aria-hidden","true");
+  el("shscrim").classList.remove("on")}
+
+function openSheet(id){
+  var l=LEADS.find(function(x){return x.id===id}); if(!l)return;
+  var n=NEXT[id]||{slot:"morning",day:1,why:"",draft:""};
+  shLead=id; shSlot=shSlot||n.slot; shDay=(shDay===null?n.day:shDay);
+  var base=new Date(2026,0,14), names=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var days="";
+  for(var i=0;i<8;i++){
+    var d=new Date(base.getTime()+ (i*86400000));
+    days+='<button class="day" data-day="'+i+'" aria-selected="'+(shDay===i)+'">'
+      +'<b>'+String(d.getDate()).padStart(2,"0")+'</b>'
+      +'<span>'+names[d.getDay()]+'</span><i class="pip"></i></button>';
+  }
+  var chips=["morning","afternoon","evening","night"].map(function(s){
+    return '<button class="chip'+(s===n.slot?" sugg":"")+'" data-slot2="'+s+'" aria-selected="'
+      +(shSlot===s)+'">'+SLOTNAME[s]+'</button>'}).join("");
+
+  el("sheet").innerHTML=
+   '<div class="sh-h">Log the call \u00b7 '+l.name+'</div>'
+   +'<div class="sh-s">'+l.proj+' \u00b7 #'+l.id+'</div>'
+   +'<div class="days">'+days+'</div>'
+   +'<div class="chips">'+chips+'</div>'
+   +(n.why?'<div class="why-slot"><strong>Why '+SLOTNAME[n.slot]+', in '
+     +(n.day===0?"today":n.day===1?"1 day":n.day+" days")+':</strong> '+n.why+'</div>':'')
+   +'<div class="fieldlab"><span>Comments <span style="color:var(--red)">*</span></span>'
+     +'<em>Drafted from the call</em></div>'
+   +'<textarea id="cmt" rows="6">'+n.draft+'</textarea>'
+   +'<p class="pre-note">Written from the transcript so you edit instead of type. '
+   +'Anything you change here corrects the extraction on this lead.</p>'
+   +'<div class="sh-f"><button class="btn-w btn-blue" id="sub">Submit</button>'
+   +'<button class="btn-w btn-out" id="mtg">Schedule a Meeting &amp; Visit</button></div>';
+  el("sheet").classList.add("on");el("sheet").setAttribute("aria-hidden","false");
+  el("shscrim").classList.add("on");el("sheet").scrollTop=0;
+  el("sub").onclick=function(){
+    done[id]=1;render();shutSheet();shSlot=null;shDay=null;
+    toast("Follow-up set \u00b7 "+SLOTNAME[shSlot||n.slot]);
+  };
+  el("mtg").onclick=function(){toast("Meeting form \u2014 in progress, not built in prototype")};
+}
+el("sheet").addEventListener("click",function(e){
+  var d=e.target.closest("[data-day]"); if(d){shDay=+d.dataset.day;openSheet(shLead);return}
+  var s=e.target.closest("[data-slot2]"); if(s){shSlot=s.dataset.slot2;openSheet(shLead);return}
+});
+el("shscrim").onclick=function(){shutSheet();shSlot=null;shDay=null};
+
+function openTranscript(id,ci){
+  var l=LEADS.find(function(x){return x.id===id}); if(!l||!l.calls)return;
+  var c=l.calls[ci];
+  el("drawer").innerHTML='<div class="dr-h"><div>'
+   +'<button class="back" id="bk">\u2190 '+l.name+'</button>'
+   +'<div style="font-size:16px;font-weight:600;margin-top:4px">'+c.d+'</div>'
+   +'<div class="rm-s">'+c.m+'</div></div>'
+   +'<button class="dr-x" id="drx" aria-label="Close">\u00d7</button></div><div class="dr-b">'
+   +'<div class="scorebox"><div><div class="big">'+c.score+'</div>'
+     +'<div class="lbl">Call quality checks passed</div></div>'
+     +'<div class="rt">'+c.read+'</div></div>'
+   +'<div class="blk"><div class="i-lab">What this call was checked for</div>'
+     +c.checks.map(function(k){return '<div class="chk"><span>'+k[0]+'</span>'
+       +'<span class="'+(k[1]?"yes":"no")+'">'+(k[1]?"Yes":"No")+'</span></div>'}).join("")+'</div>'
+   +'<div class="blk"><div class="i-lab">Transcript \u2014 highlighted lines fed the extraction</div>'
+     +c.turns.map(function(t){
+        return '<div class="turn'+(t[2]?" mark":"")+'">'
+        +'<span class="spk '+(t[0]==="rm"?"rm":"")+'">'+(t[0]==="rm"?"RM":"Client")+'</span>'
+        +'<span class="line">'+t[1]
+        +(t[2]?'<span class="pulled">\u2192 '+t[2]+'</span>':'')+'</span></div>'}).join("")+'</div>'
+   +'<div class="ev">Auto-transcribed. Highlighted turns are the lines that produced the '
+   +'motivation, capacity, constraint and engagement fields on the lead.</div></div>'
+   +'<div class="dr-f"><button class="btn btn-p" id="bk2">Back to lead</button>'
+   +'<button class="btn btn-s" id="pl">Play recording</button></div>';
+  el("drawer").scrollTop=0;
+  el("drx").onclick=shut;
+  el("bk").onclick=el("bk2").onclick=function(){openLead(id)};
+  el("pl").onclick=function(){toast("Recording \u2014 not available in prototype")};
+}
+
+function renderRMs(){
+  el("rmlist").innerHTML=RMS.map(function(r,i){
+    return '<button class="rm-row" data-rm="'+i+'">'
+    +'<div><div class="rm-n">'+r.n+'</div><div class="rm-s">Rolling 30 days</div></div>'
+    +'<div><span class="num">'+r.q+'</span><div class="bar-b"><i class="'+(r.q<50?"w":"")+'" style="width:'+r.q+'%"></i></div></div>'
+    +'<div class="num">'+r.sv+'</div><div><span class="tier '+r.tc+'">'+r.tier+'</span></div></button>';
+  }).join("");
+}
+function openRM(i){
+  var r=RMS[i];
+  el("drawer").innerHTML='<div class="dr-h"><div><div style="font-size:17px;font-weight:600">'+r.n+'</div>'
+   +'<div class="rm-s">Relationship Manager \u00b7 rolling 30 days</div></div>'
+   +'<button class="dr-x" id="drx" aria-label="Close">\u00d7</button></div><div class="dr-b">'
+   +'<div class="blk"><div class="i-lab">Call quality \u2014 from transcripts</div>'
+     +r.bars.map(function(b){return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>'+b[0]+'</span><b class="num">'+b[1]+'%</b></div><div class="bar-b"><i class="'+(b[1]<50?"w":"")+'" style="width:'+b[1]+'%"></i></div></div>'}).join("")+'</div>'
+   +'<div class="blk"><div class="i-lab">Outcomes \u2014 from CRM</div>'+r.out.map(kv).join("")+'</div>'
+   +'<div class="note" style="margin:0"><strong>Lead mix:</strong> '+r.mix+'</div></div>'
+   +'<div class="dr-f"><button class="btn btn-p" id="dx2">Close</button></div>';
+  el("drawer").classList.add("on");el("scrim").classList.add("on");
+  el("drx").onclick=shut;el("dx2").onclick=shut;
+}
+function renderAlerts(){
+  el("alertlist").innerHTML=ALERTS.map(function(a,i){
+    return '<div class="alert"><div class="al-t">'
+    +'<div><b>'+a.rm+'</b> <span class="rm-s">\u00b7 '+a.lead+' \u00b7 '+a.when+'</span></div>'
+    +'<span class="conf '+a.cc+'">'+a.conf+'</span></div>'
+    +'<div class="ev" style="margin-bottom:9px">'+a.q+'</div>'
+    +'<div style="font-size:13.5px;color:var(--tx2)">'+a.ctx+'</div><div class="acts">'
+    +(a.turns?'<button class="btn-sm" data-al="'+i+'">Read in context</button>':'')
+    +(res[i]?'<span class="btn-sm res">'+res[i]+'</span>'
+      :'<button class="btn-sm" data-a="'+i+'" data-v="Recording opened">Play recording</button>'
+      +'<button class="btn-sm" data-a="'+i+'" data-v="Raised with RM">Raise with RM</button>'
+      +'<button class="btn-sm" data-a="'+i+'" data-v="Marked not an issue">Not an issue</button>')
+    +'</div></div>';
+  }).join("");
+}
+function renderSrc(){
+  el("srclist").innerHTML=SOURCES.map(function(s){
+    return '<tr class="'+(s.flag?"flag":"")+'"><td>'+s.s+'</td><td>'+s.l+'</td><td>'+s.j+'</td><td>'+s.c+'</td>'
+    +'<td>'+s.v+'</td><td class="'+(s.good?"good":s.bad?"bad":"")+'">'+s.b+'</td>'
+    +'<td class="'+(s.good?"good":s.bad?"bad":"")+'">'+s.cpb+'</td></tr>';
+  }).join("");
+}
+function show(){
+  ["sales","manager","admin"].forEach(function(r){el("v-"+r).classList.toggle("hidden",r!==role)});
+  el("m-team").classList.toggle("hidden",mtab!=="team");
+  el("m-alerts").classList.toggle("hidden",mtab!=="alerts");
+  el("a-quality").classList.toggle("hidden",atab!=="quality");
+  el("a-junk").classList.toggle("hidden",atab!=="junk");
+  var t=TABS[role],cur=role==="manager"?mtab:atab;
+  el("tabs").innerHTML=t.map(function(x){
+    return '<button class="tab" role="tab" data-t="'+x[0]+'" aria-selected="'+(x[0]===cur)+'">'+x[1]+'</button>'}).join("");
+  el("tabs").style.display=t.length?"flex":"none";
+}
+var tt;function toast(m){var t=el("toast");t.textContent=m;t.classList.add("on");
+  clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2600)}
+
+document.querySelectorAll(".role-b").forEach(function(b){b.onclick=function(){
+  role=b.dataset.role;
+  document.querySelectorAll(".role-b").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+  shut();show();}});
+el("tabs").onclick=function(e){var b=e.target.closest("[data-t]");if(!b)return;
+  if(role==="manager")mtab=b.dataset.t;else atab=b.dataset.t;show()};
+el("app").onclick=function(e){
+  var op=e.target.closest("[data-open]"); if(op){openLead(op.dataset.open);return}
+  var hm=e.target.closest("[data-home]"); if(hm){view="home";slot=null;render();return}
+  var g=e.target.closest("[data-go]"); if(g){view="list";openSec=g.dataset.go;slot=null;render();return}
+  var gs=e.target.closest("[data-goslot]"); if(gs){view="list";slot=gs.dataset.goslot;openSec="new";render();return}
+  var cb=e.target.closest("[data-callbtn]"); if(cb){e.stopPropagation();
+    shSlot=null;shDay=null;openSheet(cb.dataset.callbtn);return}
+  var s=e.target.closest("[data-sec]"); if(s){openSec=openSec===s.dataset.sec?null:s.dataset.sec;render();return}
+  var sl=e.target.closest("[data-slot]"); if(sl){slot=slot===sl.dataset.slot?null:sl.dataset.slot;render();return}
+  var c=e.target.closest("[data-id]"); if(c)openLead(c.dataset.id);
+};
+el("rmlist").onclick=function(e){var r=e.target.closest("[data-rm]");if(r)openRM(+r.dataset.rm)};
+function openAlert(i){
+  var a=ALERTS[i];
+  el("drawer").innerHTML='<div class="dr-h"><div>'
+   +'<div style="font-size:16px;font-weight:600">'+a.rm+'</div>'
+   +'<div class="rm-s">'+a.lead+' \u00b7 '+a.when+'</div></div>'
+   +'<button class="dr-x" id="drx" aria-label="Close">\u00d7</button></div><div class="dr-b">'
+   +'<div class="scorebox"><div><span class="conf '+a.cc+'">'+a.conf+'</span>'
+     +'<div class="lbl" style="margin-top:7px">Automated flag</div></div>'
+     +'<div class="rt">'+a.ctx+'</div></div>'
+   +'<div class="blk"><div class="i-lab">Transcript \u2014 flagged line in context</div>'
+     +a.turns.map(function(t){
+        return '<div class="turn'+(t[2]===2?" flagged":t[2]?" mark":"")+'">'
+        +'<span class="spk '+(t[0]==="rm"?"rm":"")+'">'+(t[0]==="rm"?"RM":"Client")+'</span>'
+        +'<span class="line">'+t[1]
+        +(t[2]?'<span class="pulled">\u2192 '+t[2]+'</span>':'')+'</span></div>'}).join("")+'</div>'
+   +'<div class="ev">The keyword matched. The conversation around it does not support the flag \u2014 '
+   +'this is the failure mode the context view exists to catch.</div></div>'
+   +'<div class="dr-f"><button class="btn btn-p" id="ni">Not an issue</button>'
+   +'<button class="btn btn-s" id="cl2">Close</button></div>';
+  el("drawer").classList.add("on");el("scrim").classList.add("on");
+  el("drx").onclick=el("cl2").onclick=shut;
+  el("ni").onclick=function(){res[i]="Marked not an issue";renderAlerts();shut();
+    toast("Marked not an issue \u2014 correction fed back to the model")};
+}
+el("alertlist").onclick=function(e){
+  var al=e.target.closest("[data-al]"); if(al){openAlert(+al.dataset.al);return}
+  var b=e.target.closest("[data-a]");if(!b)return;
+  if(b.dataset.v==="Recording opened"){toast("Recording \u2014 not available in prototype");return}
+  res[b.dataset.a]=b.dataset.v;renderAlerts();toast(b.dataset.v)};
+el("drawer").addEventListener("click",function(e){
+  var t=e.target.closest("[data-tr]"); if(t)openTranscript(t.dataset.tr,+t.dataset.ci);
+});
+el("scrim").onclick=shut;
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){shut();shutSheet()}});
+render();renderRMs();renderAlerts();renderSrc();show();
+</script>
