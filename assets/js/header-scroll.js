@@ -4,23 +4,30 @@
   var header = document.querySelector(".site-header");
   if (!header) return;
 
-  var COMPACT_AT = 80;   // px scrolled before the header is allowed to compact
-  var DEAD_ZONE = 6;     // ignore sub-pixel/trackpad jitter below this delta
-
-  var lastY = window.scrollY;
+  var COMPACT_AT = 100;      // Scroll down past this → compact
+  var EXPAND_AT = 40;        // Scroll up to this → expand (hysteresis prevents flicker)
+  var isCompact = false;
   var ticking = false;
+  var lastY = 0;
 
-  function update() {
-    var y = window.scrollY;
-    var delta = y - lastY;
+  function update(y) {
+    var shouldBeCompact;
 
-    if (Math.abs(delta) > DEAD_ZONE) {
-      if (delta > 0 && y > COMPACT_AT) {
+    if (isCompact) {
+      // Already compact: stay compact until scrolling back up past EXPAND_AT
+      shouldBeCompact = y > EXPAND_AT;
+    } else {
+      // Not compact: only become compact after scrolling past COMPACT_AT
+      shouldBeCompact = y > COMPACT_AT;
+    }
+
+    if (shouldBeCompact !== isCompact) {
+      isCompact = shouldBeCompact;
+      if (isCompact) {
         header.classList.add("is-compact");
-      } else if (delta < 0 || y <= COMPACT_AT) {
+      } else {
         header.classList.remove("is-compact");
       }
-      lastY = y;
     }
     ticking = false;
   }
@@ -29,10 +36,16 @@
     "scroll",
     function () {
       if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
+        var y = window.scrollY;
+        if (Math.abs(y - lastY) > 5) {
+          lastY = y;
+          requestAnimationFrame(function() { update(y); });
+          ticking = true;
+        }
       }
     },
     { passive: true }
   );
+
+  update(window.scrollY);
 })();

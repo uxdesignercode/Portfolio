@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Homesfy Portal Case Study · Gulam Jilani</title>
+<meta name="description" content="Redesigning Homesfy Portal to improve property discovery, reduce campaign dependency, and build trust with home buyers." />
+<meta name="theme-color" content="#f9f9f9" />
+
+<link rel="icon" href="assets/images/logo_header.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/v3.css" />
+<style>
+/* ============================================================
+   Homesfy Portal Case Study
+   ============================================================ */
+
+:root {
+  --cs-green: #2D7A4F;
+  --cs-amber: #F5A623;
+  --cs-charcoal: #1A1A1A;
+  --cs-mid-grey: #6B6B6B;
+  --cs-light-grey: #F2F2F2;
+  --cs-hero-bg: #0F0F0F;
+  --cs-section-bg: #F7F7F7;
+  scroll-behavior: smooth;
+}
+
+html { scroll-behavior: smooth; }
+
+/* Remove header gaps */
+.site-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* ---- Hero ---- */
+.cs-hero {
+  background: #F5E6D3;
+  color: var(--ink);
+  padding: clamp(48px, 8vw, 80px) 0;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.cs-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 80px);
+  align-items: center;
+}
+
+.cs-hero-left h1 {
+  font: var(--fs-display);
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.cs-hero-left p {
+  font: var(--fs-lead);
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.cs-hero-mockups {
+  background: white;
+  border-radius: 12px;
+  border: 2px solid var(--line-light);
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+  order: -1;
+}
+
+/* ---- Section Nav ---- */
+.cs-nav {
+  position: sticky;
+  top: 6.5%;
+  z-index: 40;
+  background: white;
+  border-bottom: 1px solid var(--line-light);
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 0;
+  padding: 0;
+  border-top: none;
+  height: 56px;
+}
+
+.cs-nav::-webkit-scrollbar { display: none; }
+
+.cs-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  gap: 32px;
+  align-items: center;
+  height: 56px;
+  justify-content: center;
+  width: fit-content;
+}
+
+.cs-nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+  white-space: nowrap;
+  padding: 0 0 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 160ms var(--ease), border-color 160ms var(--ease);
+  flex-shrink: 0;
+}
+
+.cs-nav-link:hover {
+  color: var(--ink);
+}
+
+.cs-nav-link.active {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+
+/* ---- Sections ---- */
+.cs-section {
+  scroll-margin-top: 160px;
+  padding: clamp(56px, 8vw, 88px) 0;
+}
+
+.cs-section.light-bg {
+  background: var(--cs-section-bg);
+}
+
+.cs-section.dark-bg {
+  background: var(--cs-hero-bg);
+  color: white;
+}
+
+.cs-section h2 {
+  font: var(--fs-h2);
+  margin: 0 0 32px 0;
+  margin-top: 0;
+}
+
+.cs-section p {
+  font: var(--fs-16);
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.cs-section.dark-bg p {
+  color: rgba(255, 255, 255, .7);
+}
+
+/* ---- Overview Detail ---- */
+#overview h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 24px;
+  margin-top: 0;
+}
+
+.cs-overview-intro {
+  margin-bottom: 0;
+}
+
+.cs-overview-intro p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.cs-metadata-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  padding: 24px 0;
+  margin: 48px 0 0;
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  max-width: none;
+}
+
+.cs-metadata-item {
+  text-align: left;
+}
+
+.cs-metadata-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.cs-metadata-value {
+  color: #111;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.cs-metadata-item:not(:last-child) {
+  border-right: 1px solid #E0E0E0;
+  padding-right: 32px;
+}
+
+.cs-metadata-item:not(:first-child) {
+  padding-left: 32px;
+}
+
+@media (max-width: 640px) {
+  .cs-metadata-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cs-metadata-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .cs-metadata-item:nth-child(3) {
+    border-right: 1px solid #E0E0E0;
+  }
+}
+
+/* ---- Two Column Layout ---- */
+.cs-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-bottom: 64px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-two-col h3 {
+  font: var(--fs-24);
+  margin: 0 0 24px 0;
+  color: var(--ink);
+}
+
+.cs-bullet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-bullet-list li {
+  font: var(--fs-16);
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+  padding-left: 28px;
+  position: relative;
+}
+
+.cs-bullet-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--cs-green);
+}
+
+/* ---- Competitive Analysis ---- */
+.cs-screenshot-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0 64px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-screenshot {
+  background: #EBEBEB;
+  border-radius: 8px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+/* ---- Problem & Solution Cards ---- */
+.cs-problem-solution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.cs-card {
+  padding: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line-light);
+  background: #FAFAFA;
+}
+
+.cs-card.accent {
+  border-left: 4px solid var(--cs-green);
+  border: none;
+  border-left: 4px solid var(--cs-green);
+}
+
+.cs-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--cs-green);
+  margin-bottom: 16px;
+}
+
+.cs-card p {
+  margin: 0;
+  font-size: var(--fs-16);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---- Wireframes ---- */
+.cs-wireframe-gallery {
+  background: #EBEBEB;
+  border-radius: 8px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+  margin: 32px 0;
+}
+
+/* ---- Style Guide ---- */
+.cs-style-guide-section {
+  max-width: 1080px;
+  margin: 0 auto 48px;
+}
+
+.cs-style-guide-section h3 {
+  font: var(--fs-24);
+  margin: 0 0 24px 0;
+  color: var(--ink);
+}
+
+.cs-typography {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.cs-typography-mark {
+  font: var(--fs-display);
+  color: var(--ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cs-typography-details p {
+  font: var(--fs-16);
+  margin: 0 0 12px 0;
+  color: var(--muted);
+}
+
+.cs-color-palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.cs-color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cs-swatch {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid var(--line-light);
+}
+
+.cs-swatch-label {
+  font: var(--fs-14);
+  color: var(--muted);
+  text-align: center;
+}
+
+.cs-logo-lockups,
+.cs-ui-components {
+  background: #EBEBEB;
+  border-radius: 8px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+  margin: 32px 0;
+}
+
+.cs-ui-components {
+  height: 280px;
+}
+
+/* ---- Usability Testing ---- */
+.cs-stat-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0 48px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-chip {
+  background: var(--card-grey);
+  padding: 32px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.cs-chip-value {
+  font: var(--fs-24);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.cs-chip-label {
+  font: var(--fs-14);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ---- Findings Table ---- */
+.cs-findings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  font: var(--fs-14);
+}
+
+.cs-findings-table th {
+  background: var(--card-grey);
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-light);
+}
+
+.cs-findings-table td {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--line-light);
+  color: var(--muted);
+}
+
+.cs-findings-table tr:nth-child(even) {
+  background: #F7F7F7;
+}
+
+.cs-findings-table td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+  width: 25%;
+}
+
+.cs-findings-table td:nth-child(2) {
+  font-style: italic;
+  border-left: 2px solid var(--cs-green);
+  padding-left: 20px;
+  width: 50%;
+}
+
+/* ---- Final Design ---- */
+.cs-final-design-gallery {
+  background: #2A2A2A;
+  border-radius: 8px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}
+
+/* ---- Results ---- */
+.cs-results-intro {
+  max-width: 1080px;
+  margin: 0 auto 48px;
+}
+
+.cs-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cs-stat-block {
+  text-align: center;
+}
+
+.cs-stat-number {
+  font: var(--fs-display);
+  color: var(--cs-green);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.cs-stat-description {
+  font: var(--fs-16);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ---- What I Learned ---- */
+.cs-learnings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.cs-learning-block {
+  padding: 32px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--line-light);
+}
+
+.cs-learning-num {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: var(--cs-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.cs-learning-block h4 {
+  font: var(--fs-20);
+  margin: 0 0 16px 0;
+  color: var(--ink);
+}
+
+.cs-learning-block p {
+  margin: 0;
+  font: var(--fs-14);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .cs-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-two-col,
+  .cs-problem-solution,
+  .cs-stat-row,
+  .cs-learnings {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .cs-screenshot-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-metadata-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-stat-chips {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-typography {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .cs-color-palette {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-nav-list {
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  .cs-screenshot-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-findings-table {
+    font-size: 13px;
+  }
+
+  .cs-findings-table td,
+  .cs-findings-table th {
+    padding: 12px 8px;
+  }
+
+  .cs-learnings {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-color-palette {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap wrap--frame header-inner">
+    <a class="brand" href="index.html" aria-label="Gulam Jilani — home">
+      <img class="brand-mark" src="assets/images/logo_header.png" alt="" width="44" height="44" />
+      <span class="brand-name">Gulam Jilani</span>
+    </a>
+
+    <nav class="header-actions" aria-label="Contact">
+      <a class="pill" href="https://www.linkedin.com/in/gulam-jilani-55a26b123/" target="_blank" rel="noopener" aria-label="Linkedin">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.2 8.4h3.5V21H3.2V8.4Zm5.9 0h3.36v1.72h.05c.47-.86 1.6-1.77 3.3-1.77 3.53 0 4.19 2.24 4.19 5.15V21h-3.5v-6.06c0-1.45-.03-3.3-2.05-3.3-2.06 0-2.37 1.57-2.37 3.2V21H9.1V8.4Z"/></svg>
+        <span class="pill-label">Linkedin</span>
+      </a>
+
+      <a class="pill" href="https://docs.google.com/document/d/1-FLehMGRq0aszkwKJ5UdUYbuTCVFCGYG/edit?usp=sharing&ouid=104128095403604787964&rtpof=true&sd=true" aria-label="Resume" title="Resume">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        <span class="pill-label">Resume</span>
+      </a>
+
+      <a class="pill" href="mailto:ux.gulam@gmail.com" aria-label="Mail (ux.gulam@gmail.com)" title="ux.gulam@gmail.com">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>
+        <span class="pill-label">Mail</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="cs-hero">
+    <div class="wrap">
+      <!-- <div class="cs-hero-inner">
+        <img src="/assets/images/Portal_Banner.jpg"/>
+      </div> -->
+      <img src="/assets/images/Portal_Banner.jpg"/>
+    </div>
+  </section>
+
+  <!-- ============ STICKY NAV ============ -->
+  <nav class="cs-nav" aria-label="Case study sections">
+    <ul class="cs-nav-list">
+      <li><a href="#overview" class="cs-nav-link active" data-section="overview">Overview</a></li>
+      <li><a href="#discover" class="cs-nav-link" data-section="discover">Discover — Research & Insights</a></li>
+      <li><a href="#wireframes" class="cs-nav-link" data-section="wireframes">Wireframes</a></li>
+      <li><a href="#style-guide" class="cs-nav-link" data-section="style-guide">Style guide</a></li>
+      <li><a href="#usability-testing" class="cs-nav-link" data-section="usability-testing">Usability Testing</a></li>
+      <li><a href="#final-design" class="cs-nav-link" data-section="final-design">Final Design</a></li>
+      <li><a href="#results" class="cs-nav-link" data-section="results">Results & impact</a></li>
+      <li><a href="#what-i-learned" class="cs-nav-link" data-section="what-i-learned">What I Learned</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="cs-section" id="overview">
+    <div class="wrap">
+      <h2>Overview</h2>
+
+      <div class="cs-overview-intro">
+        <p>Homesfy is one of India's leading real estate platforms. They help home buyers find verified properties across Mumbai, Thane, Pune, Navi Mumbai, Bangalore and Hyderabad.</p>
+        <p>I joined Homesfy as a Product Designer and took full ownership of redesigning the B2C portal. I worked on everything — from understanding the problem, doing research, creating wireframes, building the style guide, and delivering the final high-fidelity design. My goal was to make it easier for first-time home buyers to find the right property and trust the platform — and at the same time help Homesfy reduce external campaign costs and grow the business by promoting projects directly on the portal.</p>
+      </div>
+
+      <div class="cs-metadata-row">
+        <div class="cs-metadata-item">
+          <span class="cs-metadata-label">MY ROLE</span>
+          <span class="cs-metadata-value">Product Designer — End-to-end</span>
+        </div>
+        <div class="cs-metadata-item">
+          <span class="cs-metadata-label">TYPE</span>
+          <span class="cs-metadata-value">Portal Redesign · B2C · Web + Mobile</span>
+        </div>
+        <div class="cs-metadata-item">
+          <span class="cs-metadata-label">TIMELINE</span>
+          <span class="cs-metadata-value">12+ Weeks</span>
+        </div>
+        <div class="cs-metadata-item">
+          <span class="cs-metadata-label">TOOLS</span>
+          <span class="cs-metadata-value">Figma · Balsamiq · Photoshop · Illustrator · Spreadsheets</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISCOVER & INSIGHTS ============ -->
+  <section class="cs-section light-bg" id="discover">
+    <div class="wrap">
+      <h2>Discover — Research & Insights</h2>
+
+      <div class="cs-two-col">
+        <div>
+          <h3>Business Goals</h3>
+          <ul class="cs-bullet-list">
+            <li>Reduce dependency on Google and Meta campaigns by promoting focus projects directly on the portal — by region and micro-region</li>
+            <li>Increase user trust and return visits</li>
+            <li>Improve Google rating (was 3.5 — target was 4.5)</li>
+          </ul>
+        </div>
+        <div>
+          <h3>User Pain Points</h3>
+          <ul class="cs-bullet-list">
+            <li>Information overload — too many portals, inconsistent data, no clear way to compare</li>
+            <li>No advisor visibility — buyers don't know who will call them or how experienced they are</li>
+            <li>Discovery friction — hard to find relevant new launches by area, budget, and type quickly</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="text-align: center;">Competitive Analysis</h3>
+        <p>Before I started designing, I visited competitor websites — Housing.com, HomeBazaar, and Realtors. I took screenshots and checked how they show properties to home buyers. I used the websites myself to understand what is missing and what can be better.</p>
+        <div class="cs-screenshot-row">
+          <div class="cs-screenshot" data-replace="housing-screenshot.png">Housing.com screenshot</div>
+          <div class="cs-screenshot" data-replace="homebazaar-screenshot.png">HomeBazaar screenshot</div>
+          <div class="cs-screenshot" data-replace="realtors-screenshot.png">Realtors screenshot</div>
+        </div>
+      </div>
+
+      <div class="cs-problem-solution">
+        <div class="cs-card">
+          <div class="cs-card-label">Problem</div>
+          <p>Home buyers were overwhelmed by unstructured property information, unclear pricing, and heavy dependency on external digital campaigns. There was no in-platform way to promote builder projects, leading to high campaign spend and low trust. Home buyers had no visibility into who they'd be speaking to before making a call — just a generic Contact Us button.</p>
+        </div>
+        <div class="cs-card accent">
+          <div class="cs-card-label">Solution</div>
+          <p>Redesigned the Homesfy portal to provide transparent, structured real estate data with a powerful search and discovery experience. Introduced in-platform project promotion banners — reducing external campaign dependency while giving builders direct visibility to buyers. Introduced RM (Relationship Manager) profile cards showing years of experience, number of families helped, and area specialisation — turning a cold enquiry into a trusted conversation before the first call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WIREFRAMES ============ -->
+  <section class="cs-section" id="wireframes">
+    <div class="wrap">
+      <h2>Wireframes</h2>
+      <p>Low-fidelity wireframes for key flows — property discovery, comparison, and RM profile visibility.</p>
+      <div class="cs-wireframe-gallery" data-replace="wireframe-screens.png">[ Wireframe screens — replace with exported PNG ]</div>
+    </div>
+  </section>
+
+  <!-- ============ STYLE GUIDE ============ -->
+  <section class="cs-section light-bg" id="style-guide">
+    <div class="wrap">
+      <h2>Style Guide</h2>
+
+      <div class="cs-style-guide-section">
+        <h3>Typography</h3>
+        <div class="cs-typography">
+          <div class="cs-typography-mark">Aa</div>
+          <div class="cs-typography-details">
+            <p><strong>Inter</strong></p>
+            <p>Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</p>
+            <p>Regular 400 · Medium 500 · SemiBold 600 · Bold 700</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-style-guide-section">
+        <h3>Color Palette</h3>
+        <div class="cs-color-palette">
+          <div class="cs-color-swatch">
+            <div class="cs-swatch" style="background: #2D7A4F;"></div>
+            <div class="cs-swatch-label">#2D7A4F<br>Homesfy Green</div>
+          </div>
+          <div class="cs-color-swatch">
+            <div class="cs-swatch" style="background: #F5A623;"></div>
+            <div class="cs-swatch-label">#F5A623<br>Amber/Yellow</div>
+          </div>
+          <div class="cs-color-swatch">
+            <div class="cs-swatch" style="background: #1A1A1A;"></div>
+            <div class="cs-swatch-label">#1A1A1A<br>Dark Charcoal</div>
+          </div>
+          <div class="cs-color-swatch">
+            <div class="cs-swatch" style="background: #6B6B6B;"></div>
+            <div class="cs-swatch-label">#6B6B6B<br>Mid Grey</div>
+          </div>
+          <div class="cs-color-swatch">
+            <div class="cs-swatch" style="background: #F2F2F2; border: 1px solid #ddd;"></div>
+            <div class="cs-swatch-label">#F2F2F2<br>Light Grey</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-style-guide-section">
+        <div class="cs-logo-lockups" data-replace="logo-lockups.png">[ Logo lockups — replace with PNG ]</div>
+      </div>
+
+      <div class="cs-style-guide-section">
+        <div class="cs-ui-components" data-replace="ui-components.png">[ Buttons, inputs, cards — replace with PNG ]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ USABILITY TESTING ============ -->
+  <section class="cs-section" id="usability-testing">
+    <div class="wrap">
+      <h2>Usability Testing</h2>
+      <p>I tested the portal with users — first-time and repeat buyers, aged 22–42, across Mumbai and Thane. I also interviewed the sales team to understand patterns that buyers don't always say directly.</p>
+
+      <div class="cs-stat-chips">
+        <div class="cs-chip">
+          <div class="cs-chip-value">6</div>
+          <div class="cs-chip-label">Users tested · First-time and repeat buyers aged 22–42, Mumbai and Thane</div>
+        </div>
+        <div class="cs-chip">
+          <div class="cs-chip-value">Sales interviews</div>
+          <div class="cs-chip-label">Spoke with the sales team to uncover recurring patterns from buyer calls</div>
+        </div>
+        <div class="cs-chip">
+          <div class="cs-chip-value">Direct observation</div>
+          <div class="cs-chip-label">Watched where users paused, hesitated, or dropped off during sessions</div>
+        </div>
+      </div>
+
+      <table class="cs-findings-table">
+        <thead>
+          <tr>
+            <th>Pain Point</th>
+            <th>User Quote</th>
+            <th>Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>City dropdown not visible — Missed before typing</td>
+            <td>I just typed Thane 2BHK and got confused results.</td>
+            <td>✅ Made city dropdown prominent with a Select City label</td>
+          </tr>
+          <tr>
+            <td>Comparison screen hard to find — Users didn't know it existed</td>
+            <td>I didn't know I could compare properties.</td>
+            <td>✅ Added compare checkbox on every property card</td>
+          </tr>
+          <tr>
+            <td>No visibility into advisor — Buyers felt uncomfortable</td>
+            <td>I have no idea who will contact me after I fill the form.</td>
+            <td>✅ Introduced RM profile cards with name, photo, experience and area</td>
+          </tr>
+          <tr>
+            <td>Low Google rating hurt trust — Users checked reviews first</td>
+            <td>I checked the reviews before even visiting the site.</td>
+            <td>✅ Added RERA verification and transparent pricing — rating 3.5 → 4.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ FINAL DESIGN ============ -->
+  <section class="cs-section dark-bg" id="final-design">
+    <div class="wrap">
+      <h2>Final Design</h2>
+      <p>High-fidelity mobile-first screens covering property discovery, RM profiles, project promotions, and the comparison flow.</p>
+      <div class="cs-final-design-gallery" data-replace="final-design-screens.png">[ Final design screens — replace with exported PNG ]</div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS & IMPACT ============ -->
+  <section class="cs-section" id="results">
+    <div class="wrap">
+      <h2>Results & Impact</h2>
+      <p class="cs-results-intro">The redesign reduced dependency on external campaigns — over 40 projects were promoted directly on the portal, saving more than ₹2L in monthly spend. The Google rating improved from 3.5 to 4.5 after introducing RM profile cards and transparent pricing. User satisfaction went up and support queries dropped.</p>
+
+      <div class="cs-stat-row">
+        <div class="cs-stat-block">
+          <div class="cs-stat-number">40+</div>
+          <div class="cs-stat-description">Projects Promoted on Platform</div>
+        </div>
+        <div class="cs-stat-block">
+          <div class="cs-stat-number">₹2L+</div>
+          <div class="cs-stat-description">Monthly Campaign Spend Optimised</div>
+        </div>
+        <div class="cs-stat-block">
+          <div class="cs-stat-number">3.5 → 4.5</div>
+          <div class="cs-stat-description">Google Rating Improvement</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT I LEARNED ============ -->
+  <section class="cs-section light-bg" id="what-i-learned">
+    <div class="wrap">
+      <h2>What I Learned</h2>
+
+      <div class="cs-learnings">
+        <div class="cs-learning-block">
+          <div class="cs-learning-num">1</div>
+          <h4>In-platform promotion changes the business model</h4>
+          <p>When focus projects are promoted directly on the portal by region and micro-region, external campaign dependency drops and the platform becomes more valuable to both builders and buyers.</p>
+        </div>
+        <div class="cs-learning-block">
+          <div class="cs-learning-num">2</div>
+          <h4>Trust comes from knowing who will help you</h4>
+          <p>The RM profile card was the most positively received feature during testing. Buyers felt more confident just knowing the name, face, and experience of the person who would call them.</p>
+        </div>
+        <div class="cs-learning-block">
+          <div class="cs-learning-num">3</div>
+          <h4>Mobile-first is non-negotiable</h4>
+          <p>Most home buyers in India browse on mobile first. Designing for mobile constraints first made the desktop experience cleaner too.</p>
+        </div>
+        <div class="cs-learning-block">
+          <div class="cs-learning-num">4</div>
+          <h4>Data without context is noise</h4>
+          <p>Showing '₹90L' means nothing without sqft, BHK, location, and possession date alongside it. The redesign was about surfacing context, not just data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap wrap--frame">
+    <p class="footer-kicker">Want to collaborate?</p>
+    <a class="footer-chat" href="mailto:ux.gulam@gmail.com">
+      <span>Let&rsquo;s Chat</span>
+      <svg class="chat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </a>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="mailto:ux.gulam@gmail.com"><span class="at">ux.gulam@gmail.com</span> </a>
+        <a href="https://www.linkedin.com/in/gulam-jilani-55a26b123/" target="_blank" rel="noopener" class="footer-li">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.2 8.4h3.5V21H3.2V8.4Zm5.9 0h3.36v1.72h.05c.47-.86 1.6-1.77 3.3-1.77 3.53 0 4.19 2.24 4.19 5.15V21h-3.5v-6.06c0-1.45-.03-3.3-2.05-3.3-2.06 0-2.37 1.57-2.37 3.2V21H9.1V8.4Z"/></svg>
+          Linkedin
+        </a>
+      </div>
+      <p class="footer-meta">
+        <span>Gulam Jilani · Portfolio · UI / UX / Product Design / AI</span>
+        <span class="footer-copy">©2026 All rights reserved.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script defer src="assets/js/header-scroll.js"></script>
+<script>
+// ============ DYNAMIC SCROLL MARGIN ============
+function setScrollMargins() {
+  const header = document.querySelector('.site-header');
+  const nav = document.querySelector('.cs-nav');
+  const sections = document.querySelectorAll('.cs-section');
+
+  if (header && nav) {
+    const headerHeight = header.offsetHeight;
+    const navHeight = nav.offsetHeight;
+    const totalHeight = headerHeight + navHeight;
+
+    sections.forEach(section => {
+      section.style.scrollMarginTop = totalHeight + 'px';
+    });
+  }
+}
+
+// Run on load and on resize
+window.addEventListener('load', setScrollMargins);
+window.addEventListener('resize', setScrollMargins);
+setScrollMargins();
+</script>
+<script>
+// ============ SCROLLSPY ============
+(function() {
+  'use strict';
+
+  const navLinks = document.querySelectorAll('.cs-nav-link');
+  const sections = document.querySelectorAll('.cs-section');
+
+  // Scrollspy for section links
+  const scrollspyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-section') === id) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-100px 0px -66% 0px'
+  });
+
+  sections.forEach(section => scrollspyObserver.observe(section));
+
+  // Smooth scroll on click
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sectionId = link.getAttribute('href').slice(1);
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
