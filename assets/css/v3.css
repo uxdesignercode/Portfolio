@@ -450,7 +450,7 @@ a { color: inherit; text-decoration: none; }
 .collage-col { display: grid; gap: 30px; min-height: 0; }
 .collage-col--left,
 .collage-col--right { grid-template-rows: 1fr 1fr; }
-.collage-col--right { margin-top: clamp(20px, 4.5vw, 66px); }
+/* .collage-col--right { margin-top: clamp(20px, 4.5vw, 66px); } */
 
 .collage figure { min-height: 0; height: 100%; overflow: hidden; border-radius: 12px; }
 .collage img {
