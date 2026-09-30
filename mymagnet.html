@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Gulam Jilani · Product Designer</title>
+  <meta name="description" content="Product Designer with 10+ years designing B2B SaaS, B2C and AI-powered experiences across real estate, CRM and sales platforms." />
+  <meta name="theme-color" content="#f9f9f9" />
+  <meta name="referrer" content="no-referrer">
+
+  <meta property="og:title" content="Gulam Jilani · Product Designer" />
+  <meta property="og:description" content="I turn complex business problems into simple, scalable digital products." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/profile.png" />
+  <link rel="icon" href="assets/images/logo_header.png" />
+  <link rel="stylesheet" href="assets/css/v3.css" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. Reset & Global Variables
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --accent: #1A73E8;
+      --text-main: #0B1220;
+      --text-muted: #4A5567;
+      --text-light: #8C94A6;
+      --bg-surface: #FFFFFF;
+      --bg-alt: #F7F8FA;
+      --bg-subtle: #FAFBFC;
+      --border-color: #E6E8EE;
+      --border-dark: #243247;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-wrap: pretty;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       2. Layout Containers
+       ========================================================================== */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .container-narrow {
+      max-width: 760px;
+    }
+
+    .section-divider {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-divider-top {
+      padding: 56px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .bg-subtle {
+      background-color: var(--bg-subtle);
+    }
+
+    /* ==========================================================================
+       3. Navigation Header
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       4. Typography & Headers
+       ========================================================================== */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-bar {
+      width: 22px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .heading-hero {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      margin-bottom: 28px;
+      text-wrap: balance;
+    }
+
+    .heading-section {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+
+    .heading-subsection {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .lead-text {
+      font-size: 19px;
+      color: var(--text-muted);
+      line-height: 1.62;
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .body-text {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       5. Badges, Tags & Pills
+       ========================================================================== */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 56px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 100px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+
+    .tag-warning {
+      color: #B54708;
+      background: #FEF3E2;
+    }
+
+    .tag-success {
+      color: #0F6B3F;
+      background: #E6F5EC;
+    }
+
+    .tag-feature {
+      background: var(--accent);
+      color: #fff;
+      padding: 5px 14px;
+      margin-bottom: 18px;
+    }
+
+    /* ==========================================================================
+       6. Metadata & Stats Grids
+       ========================================================================== */
+    .grid-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .grid-meta-cell {
+      background: var(--bg-surface);
+      padding: 22px 24px;
+    }
+
+    .grid-meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .grid-meta-val {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .mandate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      align-items: start;
+    }
+
+    .dark-card {
+      background: var(--text-main);
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .dark-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .quote-author {
+      margin-top: 24px;
+      font-size: 14px;
+      color: #A8B0C0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .stat-cell {
+      background: var(--bg-surface);
+      padding: 20px 22px;
+    }
+
+    .stat-num {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: normal;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .cards-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .card-clean {
+      background: var(--bg-surface);
+    }
+
+    .card-padded {
+      padding: 32px;
+    }
+
+    .card-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       7. Hero Mockups & Evolution Comparisons
+       ========================================================================== */
+    .hero-mockups {
+      margin-top: 72px;
+      background: linear-gradient(180deg, #F7F8FA 0%, #EEF2F8 100%);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 56px 32px 0;
+      overflow: hidden;
+    }
+
+    .mockup-flex {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .device-frame {
+      border-radius: 26px;
+      overflow: hidden;
+      background: var(--bg-surface);
+      border: 1px solid #DDE2EA;
+      box-shadow: 0 14px 36px rgba(11, 18, 32, 0.11);
+      flex: none;
+    }
+
+    .device-sm { width: 250px; height: 480px; position: relative; }
+    .device-md { width: 260px; height: 540px; position: relative; }
+    .device-lg {position: relative; width: 290px; height: 560px; box-shadow: 0 26px 64px rgba(11, 18, 32, 0.18); }
+    .device-evolution {position: relative; width: 240px; height: 500px; border-radius: 24px; box-shadow: 0 10px 28px rgba(11, 18, 32, 0.09); }
+
+    .device-scroll {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+
+    .evolution-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .evolution-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .evolution-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .evolution-subtitle {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .evolution-wrapper {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .comparison-col {
+      width: 240px;
+    }
+
+    .evolution-decision-box {
+      flex: 1 1 200px;
+      min-width: 0;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 22px;
+      align-self: flex-start;
+    }
+
+    /* ==========================================================================
+       8. Module Map & Deep Dives
+       ========================================================================== */
+    .module-map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+    }
+
+    .module-chip {
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .module-chip-active {
+      background: #EAF1FD;
+      border-color: #C7DBFA;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .journey-tracker {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 26px 26px 22px;
+      box-shadow: 0 18px 40px -18px rgba(11, 18, 32, 0.18);
+    }
+
+    .journey-row {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      column-gap: 14px;
+    }
+
+    .step-marker {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #EAF1FD;
+      color: #1A56B8;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .step-marker-active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 0 4px #EAF1FD;
+    }
+
+    .step-marker-final {
+      background: #0B1220;
+      color: #fff;
+    }
+
+    .step-line {
+      position: absolute;
+      top: 26px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .step-line-full {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .decision-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .box-problem {
+      background: #FEF6F6;
+      border: 1px solid #F6D9D9;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .box-problem-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #B42318;
+      margin-bottom: 10px;
+    }
+
+    .box-solution {
+      background: #F2F7FE;
+      border: 1px solid #CFE0FA;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .box-solution-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1A56B8;
+      margin-bottom: 10px;
+    }
+
+    .module-display {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-top: 24px;
+    }
+
+    .module-info {
+      flex: 1 1 320px;
+      min-width: 0;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .feature-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 9px;
+      flex: none;
+    }
+
+    /* Process Flows & Data Tables */
+    .flow-card {
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .process-step {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .process-step-active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      border-color: var(--accent);
+    }
+
+    .process-step-highlight {
+      background: #EAF1FD;
+      border-color: #C7DBFA;
+      color: #1A56B8;
+      font-weight: 600;
+    }
+
+    .process-step-final {
+      background: #0B1220;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .process-arrow {
+      color: #C3C9D4;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 760px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 14px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-light);
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid #EFF1F5;
+      color: var(--text-muted);
+    }
+
+    /* Commission Split Cards */
+    .commission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .commission-percent {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .split-chip-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .split-chip {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 100px;
+    }
+
+    .split-chip-primary {
+      background: #EAF1FD;
+      color: #1A56B8;
+    }
+
+    .split-chip-accent {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .split-chip-secondary {
+      background: #F1F3F7;
+      color: #6B7486;
+    }
+
+    .border-callout {
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+      margin-top: 16px;
+    }
+
+    /* ==========================================================================
+       9. Footer
+       ========================================================================== */
+    .footer {
+      padding: 56px 32px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .cs-video{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+    .cs-video__frame{position:relative;width:260px;max-width:100%;height:0;padding-top:216.4%;border-radius:28px;overflow:hidden;background:#0C0D10;box-shadow:0 24px 64px rgba(0,0,0,.14),0 2px 8px rgba(0,0,0,.08);-webkit-transform:translateZ(0);transform:translateZ(0)}
+    .cs-video__media{position:absolute;top:0;left:0;width:100%;height:100%;display:block;object-fit:cover;background:#0C0D10}
+    .cs-video__play{position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:#0C0D10;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+    .cs-video__play[hidden]{display:none}
+    .cs-video__play svg{width:26px;height:26px;margin-left:3px}
+    .cs-video.is-error .cs-video__play{display:none}
+    .cs-video__caption{max-width:320px;font-size: 12px;line-height:1.55;color:#52536A;text-align:center;padding: 8px;}
+    .cs-video__caption strong{color:#0C0D10}
+    @media (max-width:680px){.cs-video__frame{width:200px}}
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="top-nav">
+    <span class="nav-logo"><a href="index.html">← Back To Home</a></span>
+    <!-- <nav class="nav-links">
+      <a href="#mandate">Mandate</a>
+      <a href="#problem">Problem</a>
+      <a href="#evolution">Early work</a>
+      <a href="#modules">Modules</a>
+      <a href="#impact">Impact</a>
+    </nav> -->
+  </header>
+
+  <!-- Hero Section -->
+  <section class="section-divider" style="padding-top: 104px;" data-screen-label="Hero">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-bar"></span>Case Study  → 3
+      </div>
+      <h1 class="heading-hero">Mymagnet</h1>
+      <p class="lead-text" style="max-width: 720px; font-size: clamp(1.15rem, 2.2vw, 1.45rem);">
+        A mobile-first broker OS that brought 10,000+ real estate brokers off spreadsheets and WhatsApp groups — into a single app that mirrors their CRM.
+      </p>
+
+      <div class="pill-group">
+        <span class="pill"><span class="pill-dot"></span>Product Designer</span>
+        <span class="pill"><span class="pill-dot"></span>Mobile App · Android &amp; iOS</span>
+        <span class="pill"><span class="pill-dot"></span>Homesfy Realty Ltd</span>
+        <span class="pill"><span class="pill-dot"></span>Solo Designer</span>
+      </div>
+
+      <div class="grid-meta">
+        <div class="grid-meta-cell">
+          <div class="grid-meta-label">Platform</div>
+          <div class="grid-meta-val">React Native Mobile</div>
+        </div>
+        <div class="grid-meta-cell">
+          <div class="grid-meta-label">My Role</div>
+          <div class="grid-meta-val">End-to-End Product Design</div>
+        </div>
+        <div class="grid-meta-cell">
+          <div class="grid-meta-label">Collaborators</div>
+          <div class="grid-meta-val">1 PM · Dev Team</div>
+        </div>
+        <div class="grid-meta-cell">
+          <div class="grid-meta-label">Modules Shipped</div>
+          <div class="grid-meta-val">15 of 16 shipped</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mandate Section -->
+  <section id="mandate" class="section-divider" data-screen-label="Mandate">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 48px;">
+        <div class="eyebrow">The Mandate</div>
+        <h2 class="heading-section">Ship first. Learn from real brokers later.</h2>
+        <p class="lead-text">
+          Before the app, Homesfy's partnerships team had already onboarded 2,000–3,000 brokers to Magnet. They got access to the same desktop CRM our sales team used. But brokers kept saying the same thing: "We don't sit at a desk."
+        </p>
+      </div>
+
+      <div class="mandate-grid">
+        <div class="dark-card">
+          <div class="dark-card-label">Put the CRM in the broker's pocket.</div>
+          <p class="quote-text">
+            No research phase, no competitor study. Get brokers onto the app first, then improve it from real use.
+          </p>
+          <!-- <div class="quote-author">— My boss, at kickoff</div> -->
+        </div>
+
+        <div style="display: grid; gap: 16px;">
+          <div class="card card-clean">
+            <div class="grid-meta-label">The brokers' reality (new small block, your strongest insight)</div>
+            <p class="body-text">
+             Most brokers work alone or with one partner. Their day is on the move: site visits, home presentations, builder–broker meets, and checking which new projects are coming up. A desktop CRM made sense for our office team, not for someone who's in a car or at a site all day.
+            </p>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-cell">
+              <div class="stat-num">1–2 Months</div>
+              <div class="stat-label">to first launch</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num">1 Designer + 1 PM + Dev  team</div>
+              <div class="stat-label">people on product</div>
+            </div>
+            <!-- <div class="stat-cell">
+              <div class="stat-num">0</div>
+              <div class="stat-label">competitor studies</div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section id="problem" class="section-divider" data-screen-label="Problem">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 44px;">
+        <div class="eyebrow">The Problem</div>
+        <h2 class="heading-section">Brokers were flying blind</h2>
+        <p class="lead-text">
+          Homesfy had 10,000+ registered brokers selling real estate projects. The internal sales team had a full CRM. The brokers had nothing — no app, no visibility, no tools.
+        </p>
+      </div>
+
+      <div class="cards-grid-4">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3 class="card-title">No mobile lead tracking</h3>
+          <p class="card-desc">Brokers were adding leads by calling the ops team or messaging on WhatsApp. No app, no record, no status updates.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3 class="card-title">Fake leads flooding the system</h3>
+          <p class="card-desc">Brokers could add any lead with no accountability. The sales team wasted time and budget chasing dummy numbers. No quality filter existed.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3 class="card-title">Zero campaign visibility</h3>
+          <p class="card-desc">Brokers running digital campaigns through the platform had no idea where their money went — no PPC breakdown, no lead attribution, no ROI.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">04</div>
+          <h3 class="card-title">No project discovery tool</h3>
+          <p class="card-desc">Brokers had to manually scroll through every project listing just to find commission slabs, inventory, or developer info — no filters, no search, no quick lookup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evolution Section (Before & After: 01 to 06) -->
+  <section id="evolution" class="section-divider bg-subtle" data-screen-label="Before and after">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 24px;">
+        <div class="eyebrow">Early explorations</div>
+        <h2 class="heading-section">Where it started</h2>
+        <p class="lead-text">
+          The first launch, built in two months to get the app into brokers' hands. Watching how they used it shaped every module above. Scroll inside a phone to see the full screen.
+        </p>
+      </div>
+      <div class="pill" style="margin-bottom: 40px; background: #fff;">Scroll inside a phone to see the full screen</div>
+
+      <!-- 01 Home Evolution -->
+      <div class="evolution-card">
+        <div class="evolution-header">
+          <span class="evolution-title">01 · How am I doing?</span>
+          <span class="evolution-subtitle">What should I sell today?</span>
+        </div>
+        <div class="evolution-wrapper">
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div class="comparison-col">
+              <span class="tag tag-warning">V1 — first shipped</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p3" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="OLD_HomeVersion3Projects" from="43d87268-5ee1-481c-bbb1-73bfd88df607#/Components.bundle.js">
+                      <img src="../assets/images/HomeVersion.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                The home screen was a report. Brokers opened the app, saw their lead funnel, and closed it. Useful numbers, but no next step.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <span class="tag tag-success">V2 — redesigned</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p4" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/HomeVersion2.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                The home screen is now a starting point. Search is on top. Hot and new projects show their commission % upfront. One tap on + adds a lead to that project. The funnel is still there, just lower down.
+              </p>
+            </div>
+          </div>
+          <div class="evolution-decision-box">
+            <div class="box-solution-tag">Design decision</div>
+            <p class="body-text" style="font-size: 15px;">
+              <b>Sell first, report second.</b><br>
+              Brokers earn money by selling projects, not by checking numbers. So I moved project discovery to the top and the funnel below it. Now the first thing a broker sees answers the real question: "Which project should I push today, and how much will I earn?"
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Passbook Evolution -->
+      <div class="evolution-card">
+        <div class="evolution-header">
+          <span class="evolution-title">02 · Trust us</span>
+          <span class="evolution-subtitle">Check it yourself</span>
+        </div>
+        <div class="evolution-wrapper">
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div class="comparison-col">
+              <span class="tag tag-warning">V1 — first shipped</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p5" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/Passbook01.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                Big numbers, no explanation. Brokers saw a total but couldn't see how it was made. And "Cancel Bookings" looked like a button that cancels a booking, which is scary on a money screen.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <span class="tag tag-success">V2 — redesigned</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p6" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/Passbook_without_MRP.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                The total now shows its maths: base brokerage + ladder incentive = total brokerage. Released money sits right below, in green. "Cancelled Bookings" is now clearly a list, not an action.
+              </p>
+            </div>
+          </div>
+          <div class="evolution-decision-box">
+            <div class="box-solution-tag">Design decision</div>
+            <p class="body-text" style="font-size: 15px;">
+              <b>On a money screen, trust comes from maths you can check.</b><br>
+              Brokers don't trust a big number. They trust a number they can add up themselves. So I showed how the total is built, put "paid" right next to "earned," and fixed labels that could scare someone into thinking they'd lose a booking.
+            </p>
+          </div>
+        </div>
+      </div>
+ <!-- 03 Payments Evolution -->
+      <div class="evolution-card">
+        <div class="evolution-header">
+          <span class="evolution-title">03 · Payments</span>
+          <span class="evolution-subtitle">From empty boxes to a payslip for every booking</span>
+        </div>
+        <div class="evolution-wrapper">
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div class="comparison-col">
+              <span class="tag tag-warning">V1 — first shipped</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p13" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                     <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/BookingPayments.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+               Eight labels in three separate groups, often showing "--/--." Brokers could see the words "TDS" and "GST," but not how their brokerage turned into the money they actually got.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <span class="tag tag-success">V3 — redesigned</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p14" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                     <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/PaymentPanel.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                One statement, top to bottom, like a salary slip: brokerage earned → deductions → GST and TDS → net payable. Released and pending sit side by side, and every unfamiliar term has an ⓘ.
+              </p>
+            </div>
+          </div>
+          <div class="evolution-decision-box">
+            <div class="box-solution-tag">Design decision</div>
+            <p class="body-text" style="font-size: 15px;">
+             <b>Brokers don't doubt the amount. They doubt the gap.</b><br>
+              "I earned ₹3,60,000, why did I get less?" was the question behind most calls to accounts. So I turned the payment tab into a payslip: start with what you earned, show every deduction on its own line, then taxes, then the final amount. When the gap is explained line by line, there's nothing left to call about.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 04 Project List Evolution -->
+      <div class="evolution-card">
+        <div class="evolution-header">
+          <span class="evolution-title">04 · Project list</span>
+          <span class="evolution-subtitle">From one project per screen to six</span>
+        </div>
+        <div class="evolution-wrapper">
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div class="comparison-col">
+              <span class="tag tag-warning">V1 — first shipped</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p7" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/TopProjects.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                Big brochure-style cards. Every detail was there, but only about 1.5 projects fit on a screen. Comparing projects meant scrolling up and down again and again.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <span class="tag tag-success">V2 — redesigned</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p8" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/ProjectListAll.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                A 2-column grid shows about 6 projects at once. Commission % sits right on the photo, with Hot/New tags, search on top, and quick actions to add a lead or run a campaign from the card.
+              </p>
+            </div>
+          </div>
+          <div class="evolution-decision-box">
+            <div class="box-solution-tag">Design decision</div>
+            <p class="body-text" style="font-size: 15px;">
+              <b>Brokers compare first, then open one.</b><br>
+              A broker's first question is "which project pays me well, and where is it?" Price and BHK come later, once a client is interested. So I kept commission % and location on the card, moved price and BHK to the detail page, and fit 4× more projects on screen. Less detail per card, much faster to shortlist.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Project Detaisl -->
+      <div class="evolution-card">
+        <div class="evolution-header">
+          <span class="evolution-title">05 · Project Details</span>
+          <span class="evolution-subtitle">From a spec sheet to a "should I sell this?" page</span>
+        </div>
+        <div class="evolution-wrapper">
+          <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+            <div class="comparison-col">
+              <span class="tag tag-warning">V1 — first shipped</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p11" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/Project_Details.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                All the facts were there, but in one long list. Slab, bookings and activity sat halfway down, the price was hidden inside the floor plans, and the icons had no labels.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <span class="tag tag-success">V2 — redesigned</span>
+              <div class="device-frame device-evolution">
+                <div data-lz="p12" class="device-scroll">
+                  <div style="zoom: 0.6154; width: 390px;">
+                    <x-import component-from-global-scope="V3A_HomeVersionFunnel" from="a3349b17-a0c7-427e-9e16-46abadcf0ed2#/Components.bundle.js">
+                      <img src="../assets/images/Project_Details02.jpg" style="width: 100%;"/>
+                    </x-import>
+                  </div>
+                </div>
+              </div>
+              <p class="card-desc" style="margin-top: 14px;">
+                Everything a broker checks before pushing a project, in order: price, BHK, possession and slab first. Then why the project sells, how many bookings and activities it has, floor plans with prices, and videos of the project and the area.
+              </p>
+            </div>
+          </div>
+          <div class="evolution-decision-box">
+            <div class="box-solution-tag">Design decision</div>
+            <p class="body-text" style="font-size: 15px;">
+             <b>The broker reads this page to spot an opportunity.</b><br>              
+             A broker asks: How much will I earn? Is anyone buying here? Can I get more than one booking from this project? V2 answers all three on one page. Once they see the opportunity, they act from the bottom of the screen.
+            <br>
+              <h5>From here, the broker can Add Lead or Run Campaign. The three ways to earn are explained in the Add Lead deep dive below.</h5>
+            </p>
+          </div>
+        </div>
+      </div>
+
+     
+    </div>
+  </section>
+
+  <!-- 16 Modules Overview -->
+  <section id="modules" class="section-divider" data-screen-label="Module map">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 40px;">
+        <div class="eyebrow">The Product</div>
+        <h2 class="heading-section">16 modules. One broker OS.</h2>
+        <p class="lead-text">
+          I designed the full product — from onboarding to badge system — in collaboration with one PM. Every module had a reason to exist.
+        </p>
+      </div>
+
+      <div class="module-map-grid">
+        <div class="module-chip module-chip-active">Home Dashboard</div>
+        <div class="module-chip module-chip-active">Lead Listing</div>
+        <div class="module-chip module-chip-active">Add Lead</div>
+        <div class="module-chip module-chip-active">Digital Passbook</div>
+        <div class="module-chip module-chip-active">Project Module</div>
+        <div class="module-chip module-chip-active">Badge System</div>
+        <div class="module-chip">Splash + Onboarding</div>
+        <div class="module-chip">Login + Auth</div>
+        <div class="module-chip">Run Campaign</div>
+        <div class="module-chip">Home Loan Referral</div>
+        <div class="module-chip">Bulk Lead Upload</div>
+        <div class="module-chip">Refer &amp; Earn</div>
+        <div class="module-chip">Profile + KYC</div>
+        <div class="module-chip">Error States</div>
+        <div class="module-chip">News (on hold)</div>
+        <div class="module-chip">Booking Flow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep Dives: Intro & Journey Map -->
+  <section data-screen-label="Deep dives" style="padding-top: 96px;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 56px; align-items: center;">
+        <div>
+          <div class="eyebrow">Deep Dives · 9 modules</div>
+          <h2 class="heading-section">From first lead to payout, <span style="color: var(--accent);">one decision at a time</span></h2>
+          <p class="lead-text" style="margin-top: 18px;">Nine modules along the broker's journey. Each one starts with the problem and ends with the call I made.</p>
+        </div>
+
+        <div class="journey-tracker">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+            <span style="font-family: var(--font-display); font-size: 17px; font-weight: 700;">How the modules connect</span>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-light);">Lead → payout</span>
+          </div>
+
+          <div class="journey-row">
+            <span style="position: relative; display: flex; justify-content: center;">
+              <span class="step-marker">1</span>
+              <span class="step-line"></span>
+            </span>
+            <div style="padding: 3px 0 18px;">
+              <div style="font-size: 15px; font-weight: 700;">Lead comes in</div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-top: 3px;">Add lead · Lead, Digital Lead or Booking Lead</div>
+            </div>
+
+            <span style="position: relative; display: flex; justify-content: center;">
+              <span class="step-line-full"></span>
+              <span class="step-marker">2</span>
+            </span>
+            <div style="padding: 3px 0 18px;">
+              <div style="font-size: 15px; font-weight: 700;">Lead is tracked</div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-top: 3px;">Home · Lead listing, mirroring the 15 CRM stages</div>
+            </div>
+
+            <span style="position: relative; display: flex; justify-content: center;">
+              <span class="step-line-full"></span>
+              <span class="step-marker step-marker-active">3</span>
+            </span>
+            <div style="padding: 3px 0 18px;">
+              <div style="font-size: 15px; font-weight: 700;">Project is shared</div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-top: 3px;">Search · Share as a link or a PDF, carrying the broker's number</div>
+            </div>
+
+            <span style="position: relative; display: flex; justify-content: center;">
+              <span class="step-line-full"></span>
+              <span class="step-marker">4</span>
+            </span>
+            <div style="padding: 3px 0 18px;">
+              <div style="font-size: 15px; font-weight: 700;">Client books</div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-top: 3px;">Booking timeline · a state for every step</div>
+            </div>
+
+            <span style="position: relative; display: flex; justify-content: center;">
+              <span style="position: absolute; top: 0; height: 4px; width: 2px; background: var(--border-color);"></span>
+              <span class="step-marker step-marker-final">5</span>
+            </span>
+            <div class="dark-card" style="padding: 12px 14px; border-radius: 12px;">
+              <div style="font-size: 15px; font-weight: 700;">Broker gets paid</div>
+              <div style="font-size: 13px; color: #A8B0C0; margin-top: 3px;">Passbook · Digital Passbook for campaign spend</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; border: 1px dashed #C7DBFA; border-radius: 12px; padding: 12px 14px; background: #F7FAFF;">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1A56B8; margin-bottom: 4px;">Across every step</div>
+            <div style="font-size: 13px; color: var(--text-muted); line-height: 1.5;"><strong>Badge</strong> sets the daily lead limit (10 / 15 / 20) and grows with real bookings.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 01: Home Dashboard -->
+  <section data-screen-label="Module 01 Home" class="section-divider-top" style="margin-top: 56px;">
+    <div class="container">
+      <div class="eyebrow">Module 01 · Home Dashboard</div>
+      <h3 class="heading-subsection">The first thing a broker sees every morning</h3>
+      <p class="lead-text">The home screen needed to answer one question instantly: how are my leads doing? I designed it as a live dashboard — total bucket, today's leads, stage breakdown, and performance at a glance.</p>
+      
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Brokers had no single view of their lead pipeline. They were calling the ops team just to know how many leads they had. Friction every single morning.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Led with the bucket count as the hero number. Below it — today's leads, stage-wise breakdown (Calling / Answered / Follow Up / Site Visit), and conversion metrics. Dashboard-first, action-second.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div data-lz="p15" class="device-scroll">
+            <div class="video">
+              <iframe
+              src="https://www.youtube-nocookie.com/embed/i2iHYlosLps?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+            </div>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Home Dashboard</h4>
+          <p class="body-text" style="margin-bottom: 18px;">The command center for every broker's day. Instant clarity — no tapping, no scrolling to find your numbers.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span>Total lead bucket (hero metric)</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Today's new leads</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Stage-wise breakdown matching CRM</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Conversion rate at a glance</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Quick-add FAB for fast lead entry</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 02: Lead Listing -->
+  <section data-screen-label="Module 02 Lead listing" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 02 · Lead Listing</div>
+      <h3 class="heading-subsection">The CRM in your pocket</h3>
+      <p class="lead-text">The lead listing mirrors the exact CRM workflow the internal sales team uses. Every stage — from first call to booking — is available on mobile. Brokers never have to call ops to update a lead status again.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">The desktop CRM had a 15-stage lead lifecycle. None of it was accessible on mobile. Brokers were calling in updates or just not updating leads at all.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Built the listing around the broker's mental model: ID, Client Name, Number, Project — the four things they actually check. Tap into detail for full history, call recordings, and stage updates.</p>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="grid-meta-label">Lead lifecycle (mirrors CRM)</div>
+        <div class="process-flow">
+          <span class="process-step process-step-active">Add Lead</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Auto Assign</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">RM Assign</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step process-step-active">Calling</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Answered</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Opportunity</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step process-step-active">Site Visit</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Booking</span>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+         <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/rdywWIZ4tnI?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Lead Listing + Detail</h4>
+          <p class="body-text" style="margin-bottom: 18px;">Tap any lead to see its full profile — four tabs giving brokers everything the sales team can see.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span><span><strong>Summary</strong> — lead overview and current stage</span></div>
+            <div class="feature-item"><span class="feature-bullet"></span><span><strong>History</strong> — full timeline of all activity</span></div>
+            <div class="feature-item"><span class="feature-bullet"></span><span><strong>Audio Recording</strong> — Knowlarity call recordings played in-app</span></div>
+            <div class="feature-item"><span class="feature-bullet"></span><span><strong>Details</strong> — complete lead information</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 03: Passbook -->
+  <section data-screen-label="Module 03 Passbook" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 03 · Passbook</div>
+      <h3 class="heading-subsection">Know exactly what you've earned</h3>
+      <p class="lead-text">Brokers were closing deals but had no real-time visibility into their payouts. The Passbook gives every broker a clear, deal-by-deal ledger — what's cleared, what's pending, and what's coming.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Commission payouts were opaque. Brokers knew a deal closed but had no idea when or how much they'd actually receive. They were chasing the accounts team for clarity.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Designed a per-deal ledger: deal name, project, commission amount, payout status, and timeline. One screen that replaces every WhatsApp message to accounts.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/tmDujiVoO4k?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Passbook — commission ledger</h4>
+          <p class="body-text" style="margin-bottom: 18px;">A deal-by-deal breakdown of everything the broker has earned on the platform.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span>Per-deal commission amount</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Project and client name</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Payout status — Cleared / Pending</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Timeline of payments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 04: Digital Passbook -->
+  <section data-screen-label="Module 04 Digital Passbook" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 04 · Digital Passbook</div>
+      <h3 class="heading-subsection">From blind spending to full ROI visibility</h3>
+      <p class="lead-text">Brokers could run Meta, Google, SMS, and email campaigns through the platform. But once the money left their account, they had no idea what happened to it. The Digital Passbook was my answer.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Brokers were spending on campaigns with zero visibility. No PPC breakdown, no lead attribution, no way to know which campaign was working. They were trusting Homesfy blindly.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Designed a per-campaign tracker: total spend, leads generated, bookings, campaign status (live/paused), and cost per lead. Each card shows whether the investment is paying off — at a glance.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/gir74dcpxM4?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/S0COXR-Mr_k?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Campaign tracker</h4>
+          <p class="body-text" style="margin-bottom: 18px;">Every campaign the broker has ever run — active or completed — tracked in one place.</p>
+          <div class="feature-list" style="margin-bottom: 24px;">
+            <div class="feature-item"><span class="feature-bullet"></span>Amount spent per campaign</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Project the campaign ran for</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Total leads generated</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Bookings from that campaign</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Status — Live / Paused</div>
+          </div>
+          <div class="border-callout">
+            <div class="box-solution-tag" style="margin-bottom: 8px;">Post-launch iteration</div>
+            <h5 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Added campaign timeline</h5>
+            <p class="body-text" style="font-size: 15px;">After launch, brokers wanted to see the full history — when it was paused, when budget was topped up, when leads spiked. Added a timeline view to each campaign detail page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 05: Project Module -->
+  <section data-screen-label="Module 05 Project module" class="section-divider-top bg-subtle">
+    <div class="container">
+      <span class="tag tag-feature">My idea · Biggest booking source</span>
+      <div class="eyebrow">Module 05 · Project Module</div>
+      <h3 class="heading-subsection">Every share becomes a personal lead funnel</h3>
+      <p class="lead-text">This was my idea. I designed it and brought it to the PM — he loved it immediately. The insight: brokers share project details with clients over WhatsApp all the time. What if every shared link had the broker's number built in?</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Before sharing any project, brokers had to manually scroll through every listing just to find the right one — no filters, no search, no quick lookup. And once the client got interested, they'd call Homesfy's main number — not the broker who sent the info. The broker lost the lead they generated themselves.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Every project the broker shares carries their own profile. Tapping Share asks one question: send a link or a PDF. The link opens the project page with the broker's phone and WhatsApp built in. The PDF turns the whole project into a document with a broker card at the bottom. Either way, the client contacts the broker directly and the booking is credited to them, with no manual tagging.</p>
+        </div>
+      </div>
+
+      <div class="card card-clean" style="border-radius: 20px; padding: 28px; margin-bottom: 32px;">
+        <div class="grid-meta-label">How the share flow works</div>
+        <div class="process-flow">
+          <span class="process-step">Broker opens project</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Taps share (WhatsApp)</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step process-step-highlight">Link auto-tags broker's number</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Client sees project + broker</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step">Client calls broker directly</span>
+          <span class="process-arrow">→</span>
+          <span class="process-step process-step-final">Booking attributed to broker</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 26px;">
+          <div class="card" style="border-radius: 14px; padding: 20px;">
+            <div class="grid-meta-label">What the project listing shows</div>
+            <div class="body-text" style="font-size: 15px;">Commission slab per project · Developer info · Available inventory · Location · BHK configuration · Price range</div>
+          </div>
+          <div class="card" style="border-radius: 14px; padding: 20px;">
+            <div class="grid-meta-label">The personalized share</div>
+            <div class="body-text" style="font-size: 15px;">Broker taps Share and picks a format.<br><strong>Link:</strong> the project page with the broker's phone and WhatsApp added automatically.<br><strong>PDF:</strong> the full project as a document, ending with a broker card: name, designation, years in real estate, specialty locations, phone and WhatsApp.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-display" style="margin-bottom: 32px;">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/G_voUsIhhL0?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info dark-card" style="border-radius: 18px; padding: 28px;">
+          <div class="dark-card-label">Why this matters</div>
+          <p class="body-text" style="font-size: 17px; color: #E4E8EF;">Before this module, brokers would share Homesfy's main project brochure and lose the lead to the company's own sales team. Now every share is their own funnel. This is the feature that turned Mymagnet from a lead tracker into a revenue engine for brokers.</p>
+        </div>
+      </div>
+
+      <div class="grid-meta-label">Commission split — how sharing ties to earnings</div>
+      <div class="commission-grid">
+        <div class="card card-clean">
+          <div class="commission-percent">50%</div>
+          <p class="card-desc" style="margin-bottom: 16px;">Broker adds lead manually — bulk upload or single entry. Homesfy handles everything else.</p>
+          <div class="split-chip-group"><span class="split-chip split-chip-primary">Broker 50%</span><span class="split-chip split-chip-secondary">Company 50%</span></div>
+        </div>
+        <div class="card card-clean">
+          <div class="commission-percent">60%</div>
+          <p class="card-desc" style="margin-bottom: 16px;">The broker funds a digital campaign that Homesfy's campaign team runs under its banner (Meta, Google, SMS).</p>
+          <div class="split-chip-group"><span class="split-chip split-chip-primary">Broker 60%</span><span class="split-chip split-chip-secondary">Company 40%</span></div>
+        </div>
+        <div class="card card-clean" style="border-color: #C7DBFA;">
+          <div class="commission-percent" style="color: var(--accent);">80%</div>
+          <p class="card-desc" style="margin-bottom: 16px;">Booking Lead. The broker brings a client ready to book. Homesfy's salesperson helps negotiate with the builder and close.</p>
+          <div class="split-chip-group"><span class="split-chip split-chip-accent">Broker 80%</span><span class="split-chip split-chip-secondary">Company 20%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 06: Badge Profile -->
+  <section data-screen-label="Module 06 Badge" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 06 · Badge Profile</div>
+      <h3 class="heading-subsection">Your tier is your trust score</h3>
+      <p class="lead-text">The badge system looks like a reward mechanic. It's actually a quality gate and a broker identity system. A Gold broker doesn't just get more leads — their entire profile looks different. It signals credibility to Homesfy's team, unlocks higher lead caps, and earns instant payouts.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Any broker could spam the platform with fake leads. The sales team was wasting budget chasing dummy numbers. There was no way to distinguish a serious broker from a bad actor.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Designed tier progression as a trust system. Bronze starts at 10 leads a day. As brokers prove quality — real bookings, real clients — they move up. The badge on the profile is visible proof of that trust level.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/nSgt9Xydeu4?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="device-frame device-md">
+          <div data-lz="p22" class="device-scroll">
+            <div style="zoom: 0.6667; width: 100%;">
+              <img src="../assets/images/Profile.jpg" style="width: 100%;"/>
+            </div>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Gold tier — badge profile</h4>
+          <p class="body-text" style="margin-bottom: 18px;">The badge on the profile communicates status instantly — a verified, trusted partner in the Homesfy network.</p>
+          <div class="feature-list" style="margin-bottom: 24px;">
+            <div class="feature-item"><span class="feature-bullet" style="background: #B45309;"></span><span><strong>Bronze</strong> — 10 leads/day · Full RM support</span></div>
+            <div class="feature-item"><span class="feature-bullet" style="background: var(--text-light);"></span><span><strong>Silver</strong> — 15 leads/day · Campaign leads</span></div>
+            <div class="feature-item"><span class="feature-bullet" style="background: #F59A00;"></span><span><strong>Gold</strong> — 20 leads/day · 0.25% bonus · Instant payout on first client payment</span></div>
+          </div>
+          <div class="border-callout">
+            <div class="box-solution-tag" style="margin-bottom: 8px;">Post-launch iteration</div>
+            <h5 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Added profile tag system</h5>
+            <p class="body-text" style="font-size: 15px;">After launch some brokers were still adding unqualified leads despite the tier cap. Added a tag system so team members could flag broker behavior — filtering out bad actors before they affected the pipeline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 07: Lead Add Process -->
+  <section data-screen-label="Module 07 Add lead" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 07 · Lead Add Process</div>
+      <h3 class="heading-subsection">Where commitment meets commission</h3>
+      <p class="lead-text">Adding a lead in Mymagnet isn't just a form — it's where brokers choose their commission model. The add-lead flow is the moment of decision: how much support do you want from Homesfy, and what are you willing to give up in return? I designed this to make that trade-off completely transparent.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Three commission models, each with a different broker-effort trade-off. Brokers didn't understand why their split was what it was — or what they'd have to do differently to earn more.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Built the lead-type selection into the add-lead flow itself. Brokers choose the lead type before submitting — they see the trade-off (commission vs support) at the exact moment of decision.</p>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Lead type</th>
+              <th>How leads come in</th>
+              <th>Broker invests</th>
+              <th>Booking split</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 700; color: #B45309; white-space: nowrap;">Lead · 50%</td>
+              <td>Adds leads manually, by bulk upload or single entry. Homesfy's RM takes over the calling, follow-up, site visits and closing.</td>
+              <td>Time to add the lead</td>
+              <td><strong>50%</strong> broker · 50% company</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 700; color: #6B7486; white-space: nowrap;">Digital Lead · 60%</td>
+              <td>Funds a digital campaign under Homesfy's banner (Meta, Google, SMS). Homesfy's PPC and Facebook campaign managers run it.</td>
+              <td>Campaign budget</td>
+              <td><strong>60%</strong> broker · 40% company</td>
+            </tr>
+            <tr style="background: var(--bg-subtle);">
+              <td style="font-weight: 700; color: #B8860B; white-space: nowrap;">Booking Lead · 80%</td>
+              <td>Brings a client who is ready to book, and adds the client's name and documents. Homesfy's salesperson joins the meeting and negotiates the price with the builder.</td>
+              <td>An existing client</td>
+              <td><strong>80%</strong> broker · 20% company</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+           <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/AXkyVusMhng?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Add lead · plan selection</h4>
+          <p class="body-text" style="margin-bottom: 16px;">The sheet is the model picker itself. Three options, each stating the share and what the broker has to do to earn it:</p>
+          <div class="feature-list" style="margin-bottom: 20px;">
+            <div class="feature-item"><strong style="font-family: var(--font-display); font-size: 18px; color: var(--accent); flex: none; width: 52px;">50%</strong><span><strong>Lead</strong> — add the lead, get 50% share</span></div>
+            <div class="feature-item"><strong style="font-family: var(--font-display); font-size: 18px; color: var(--accent); flex: none; width: 52px;">60%</strong><span><strong>Digital Lead</strong> — fund a campaign run by Homesfy's campaign team, get 60% share</span></div>
+            <div class="feature-item"><strong style="font-family: var(--font-display); font-size: 18px; color: var(--accent); flex: none; width: 52px;">80%</strong><span><strong>Booking Lead</strong> — bring a client ready to book, get 80% share</span></div>
+          </div>
+          <div class="card" style="border-radius: 16px; padding: 22px;">
+            <div class="grid-meta-label">Quality gate</div>
+            <p class="body-text" style="font-size: 15px;">The badge system handles the fake lead problem separately. Bronze brokers get 10 leads a day, which is not enough volume to abuse the system. Gold brokers have proven quality, so they get the higher cap of 20.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 08: Search & Filters -->
+  <section data-screen-label="Module 08 Search" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 08 · Search &amp; Filters</div>
+      <h3 class="heading-subsection">Finding a project while the client is still on the call</h3>
+      <p class="lead-text">Brokers look projects up under time pressure — a client asks about a locality, and the answer has to arrive in seconds. Search had to work from a half-remembered builder name, a locality, or nothing at all.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">The only way to find a project was to scroll the full list. No search, no filters, and no way to narrow down by builder, location or configuration.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Search opens with trending projects and recent locations, so an empty query is still useful. Typing narrows across project, builder and locality at once, and filters persist so a broker can work a shortlist across several calls.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/Anb-YnAqi6g?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Search · trending and typed states</h4>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span>Trending projects shown before any query</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Results match project, builder and locality</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Builder and location filters applied as chips</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Dedicated no-results state that suggests a next step</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 09: Booking Timeline -->
+  <section data-screen-label="Module 09 Booking timeline" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 09 · Booking Timeline</div>
+      <h3 class="heading-subsection">Where a deal actually is, without asking anyone</h3>
+      <p class="lead-text">A booking is not one event. Between agreement and payout sit registration, bank disbursement, invoice and release — each with its own delay, and each a reason for a broker to call the office.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">Once a lead converted, the broker lost sight of it. Status updates came by phone call, and cancellations often reached the broker last.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Modelled the booking as a vertical timeline with a state per step — done, in progress, blocked, cancelled. The broker can see which step is holding the payout and who owns it, which removed most status calls to the ops team.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div class="video">
+              <iframe
+              src="https://www.youtube.com/embed/t3Kza9MXKHM?autoplay=1&mute=1&loop=1&playlist=i2iHYlosLps&controls=0&playsinline=1&rel=0&modestbranding=1"
+              title="Broker App · Home Screen"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+            </iframe>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">Booking timeline</h4>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span>Step-by-step progress from booking to payout</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Amounts attached to the step that produced them</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Distinct cancelled state, designed rather than bolted on</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Eight timeline variants covering every real booking path</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 10: Login & Onboarding -->
+  <section data-screen-label="Module 10 Login" class="section-divider-top">
+    <div class="container">
+      <div class="eyebrow">Module 10 · Login &amp; Onboarding</div>
+      <h3 class="heading-subsection">One number, no password</h3>
+      <p class="lead-text">The broker's phone number is already their identity in the business — it is what clients call and what the CRM keys on. Making it the login removed the only credential anyone needed to remember.</p>
+
+      <div class="decision-row">
+        <div class="box-problem">
+          <div class="box-problem-tag">The problem</div>
+          <p class="card-desc">The audience ranges from digitally fluent agencies to one-person brokerages who rarely install apps. Any friction at the first screen costs an activation.</p>
+        </div>
+        <div class="box-solution">
+          <div class="box-solution-tag">Design decision</div>
+          <p class="card-desc">Phone plus OTP, with every field state designed — default, focus, filled, error, disabled — so a mistyped digit explains itself instead of failing silently. KYC comes later, once the broker has already seen value.</p>
+        </div>
+      </div>
+
+      <div class="module-display">
+        <div class="device-frame device-md">
+          <div data-lz="p26" class="device-scroll">
+            <div class="video">
+              <figure class="cs-video" data-cs-video>
+                <div class="cs-video__frame">
+                  <video class="cs-video__media"
+                        muted loop playsinline webkit-playsinline
+                        preload="none"
+                        poster="../assets/images/Passbook_without_MRP.jpg"
+                        aria-label="Home screen: live projects first, then the lead bucket and stage counts">
+                    <source src="../assets/images/VideoMotion/LoginOTPMotion.webm" type='video/webm; codecs="vp9"'>
+                    <source src="../assets/images/VideoMotion/LoginOTPMotion.mp4" type="video/mp4">
+                  </video>
+                  <button class="cs-video__play" type="button" aria-label="Play animation" hidden>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>
+                  </button>
+                </div>
+                <figcaption class="cs-video__caption">
+                  <strong>OTP login:</strong> phone number and a one-time code. No password to forget. KYC comes later, after the broker has seen what the app can do.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="module-info">
+          <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px;">OTP login</h4>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-bullet"></span>Phone number as the single identifier</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Full input state set: default, hover, focus, error, disabled</div>
+            <div class="feature-item"><span class="feature-bullet"></span>KYC deferred until after first value</div>
+            <div class="feature-item"><span class="feature-bullet"></span>Verification hard-blocks payouts, not exploration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Other Shipped Modules -->
+  <section data-screen-label="All modules" class="section-divider-top bg-subtle" style="padding: 96px 0;">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 40px;">
+        <div class="eyebrow">All Modules</div>
+        <h2 class="heading-section">Everything else that shipped</h2>
+      </div>
+
+      <div class="cards-grid-3">
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Run Campaign</div>
+          <p class="card-desc">Broker self-funds lead generation. Picks a project, sets a budget, chooses channel (Meta / Google / SMS / Email). Simple form — wireframed with PM. The passbook tracks results.</p>
+        </div>
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Home Loan Referral</div>
+          <p class="card-desc">Broker adds a client's name and number. If the home loan goes through, broker earns 2%. Minimal friction — maximum incentive to cross-sell.</p>
+        </div>
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Bulk Lead Upload</div>
+          <p class="card-desc">For brokers with 100+ leads. Download our Excel template (Name / Number / Project / Location), fill it, upload it. One shot instead of 100 manual entries.</p>
+        </div>
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Refer &amp; Earn</div>
+          <p class="card-desc">Refer 1 broker who books → ₹5,000. Refer multiple → ₹10,000 cash + ₹10,000 in digital campaign leads. Growth loop + retention incentive in one mechanic.</p>
+        </div>
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Profile + KYC</div>
+          <p class="card-desc">Brokers must submit RERA number, GST number, company name, and government ID to unlock platform benefits. Hard block — no verification, no access. Keeps the broker network clean and legally compliant.</p>
+        </div>
+        <div class="card card-clean" style="border-radius: 18px;">
+          <div class="eyebrow" style="margin-bottom: 12px;">Error + Empty States</div>
+          <p class="card-desc">Designed three states: new user empty state (no data yet, show what to do), no internet screen, blank data screen (filters returned nothing). Brokers should never see a white screen and wonder if the app is broken.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section id="impact" class="section-divider" data-screen-label="Impact">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 40px;">
+        <div class="eyebrow">Impact</div>
+        <h2 class="heading-section">What it moved</h2>
+      </div>
+
+      <div class="cards-grid-4">
+        <div class="card card-padded" style="border-radius: 18px;">
+          <div class="stat-num" style="font-size: clamp(30px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px;">10K+</div>
+          <div class="card-desc">Registered brokers on the platform</div>
+        </div>
+        <div class="card card-padded" style="border-radius: 18px;">
+          <div class="stat-num" style="font-size: clamp(30px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px;">1–2 mo</div>
+          <div class="card-desc">From kickoff to MVP launch</div>
+        </div>
+        <div class="card card-padded" style="border-radius: 18px;">
+          <div class="stat-num" style="font-size: clamp(30px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px;">15</div>
+          <div class="card-desc">Modules shipped out of 16 planned</div>
+        </div>
+        <div class="dark-card" style="border-radius: 18px; padding: 32px;">
+          <div class="stat-num" style="font-size: clamp(30px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px; color: #fff;">0→1</div>
+          <div class="card-desc" style="color: #A8B0C0;">Built from scratch — no existing mobile product</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learnings & Retrospective -->
+  <section data-screen-label="Learnings" class="section-divider bg-subtle">
+    <div class="container">
+      <div class="dark-card" style="border-radius: 22px; padding: 36px; margin-bottom: 72px;">
+        <div class="eyebrow" style="color: #7FB5F5; margin-bottom: 14px;">What I did</div>
+        <p class="heading-subsection" style="margin-bottom: 28px; max-width: 820px; color: #fff;">Sole designer on a 0→1 broker platform: 16 modules designed, 15 shipped, used by 10,000+ brokers.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+          <div style="border: 1px solid #243247; border-radius: 14px; padding: 18px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Owned the product end to end</div>
+            <div class="body-text" style="font-size: 14px; color: #A8B0C0;">From onboarding to the badge system, with one PM and the dev team.</div>
+          </div>
+          <div style="border: 1px solid #243247; border-radius: 14px; padding: 18px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Proposed the share feature</div>
+            <div class="body-text" style="font-size: 14px; color: #A8B0C0;">Not in the brief. Designed it, pitched it to the PM, and it became the biggest booking source.</div>
+          </div>
+          <div style="border: 1px solid #243247; border-radius: 14px; padding: 18px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Designed the earning and trust systems</div>
+            <div class="body-text" style="font-size: 14px; color: #A8B0C0;">Lead types at 50 / 60 / 80% and badge caps at 10 / 15 / 20 leads a day.</div>
+          </div>
+          <div style="border: 1px solid #243247; border-radius: 14px; padding: 18px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Kept improving after launch</div>
+            <div class="body-text" style="font-size: 14px; color: #A8B0C0;">Added the campaign timeline and profile tags from real broker behaviour.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-narrow" style="margin-bottom: 40px;">
+        <div class="eyebrow">What I Learned</div>
+        <h2 class="heading-section">Three things this project taught me</h2>
+      </div>
+
+      <div style="display: grid; gap: 16px;">
+        <div class="card card-clean" style="display: flex; gap: 28px; border-radius: 18px; padding: 30px; flex-wrap: wrap;">
+          <div style="font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #DDE2EA; line-height: 1; flex: none;">01</div>
+          <div style="flex: 1 1 280px; min-width: 0;">
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 10px;">Design decisions are business decisions</h3>
+            <p class="body-text">The tier system, the badge caps, the personalized project sharing — these weren't just UI choices. Each one directly affected lead quality, broker revenue, and Homesfy's sales costs. Being a product designer on this project meant understanding the business deeply enough to make those calls — not just execute them.</p>
+          </div>
+        </div>
+        <div class="card card-clean" style="display: flex; gap: 28px; border-radius: 18px; padding: 30px; flex-wrap: wrap;">
+          <div style="font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #DDE2EA; line-height: 1; flex: none;">02</div>
+          <div style="flex: 1 1 280px; min-width: 0;">
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 10px;">Bring ideas, not just answers</h3>
+            <p class="body-text">The project sharing feature — broker's number auto-embedded in every share — came from me, not the brief. I designed it, showed the PM, and he shipped it. The best features I worked on weren't assigned to me. They came from understanding the user's daily behavior well enough to spot what was missing.</p>
+          </div>
+        </div>
+        <div class="card card-clean" style="display: flex; gap: 28px; border-radius: 18px; padding: 30px; flex-wrap: wrap;">
+          <div style="font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #DDE2EA; line-height: 1; flex: none;">03</div>
+          <div style="flex: 1 1 280px; min-width: 0;">
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 10px;">Post-launch is where the real design work starts</h3>
+            <p class="body-text">The passbook timeline, the profile tag system — both came after launch, from watching how brokers actually used the product. The first version answers the design brief. The second version answers the user. I learned to treat launch as chapter one, not the end.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap wrap--frame">
+    <p class="footer-kicker">Want to collaborate?</p>
+    <a class="footer-chat" href="mailto:ux.gulam@gmail.com">
+      <span>Let&rsquo;s Chat</span>
+      <svg class="chat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </a>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="mailto:ux.gulam@gmail.com"><span class="at">ux.gulam@gmail.com</span> </a>
+        <!-- TODO: replace # with the real LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/gulam-jilani-55a26b123/" target="_blank" rel="noopener" class="footer-li">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.2 8.4h3.5V21H3.2V8.4Zm5.9 0h3.36v1.72h.05c.47-.86 1.6-1.77 3.3-1.77 3.53 0 4.19 2.24 4.19 5.15V21h-3.5v-6.06c0-1.45-.03-3.3-2.05-3.3-2.06 0-2.37 1.57-2.37 3.2V21H9.1V8.4Z"/></svg>
+          Linkedin
+        </a>
+      </div>
+      <p class="footer-meta">
+        <span>Gulam Jilani · Portfolio · UI / UX / Product Design / AI</span>
+        <span class="footer-copy">©2026 All rights reserved.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
